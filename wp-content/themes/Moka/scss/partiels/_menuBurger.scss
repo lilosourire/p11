@@ -1,0 +1,77 @@
+/* Styles pour le menu hamburger */
+#IconeMenuBurger {
+  width: 30px;
+  height: 20px;
+  background-color: #000;
+  position: relative;
+  cursor: pointer;
+  display: none; /* Par défaut, masquer l'icône du menu hamburger sur les écrans plus larges */
+}
+
+#IconeMenuBurger::before,
+#IconeMenuBurger::after {
+  content: "";
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+  position: absolute;
+  transition: 0.3s;
+}
+
+#IconeMenuBurger::before {
+  top: 0;
+}
+
+#IconeMenuBurger::after {
+  bottom: 0;
+}
+
+#IconeMenuBurger.open::before {
+  transform: rotate(-45deg);
+  top: 10px;
+}
+
+#IconeMenuBurger.open::after {
+  transform: rotate(45deg);
+  bottom: 10px;
+}
+
+/* Styles pour le menu responsive */
+#topnav_responsive_menu {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  /* Styles pour le menu hamburger visible sur les écrans plus petits */
+  #IconeMenuBurger {
+    display: block;
+  }
+
+  /* Masquer le menu classique sur les écrans plus petits */
+  .MenuHeader ul.liste1 {
+    display: none;
+  }
+
+  /* Positionner le menu hamburger à droite sur les écrans plus petits */
+  #IconeMenuBurger {
+    order: 3; /* Déplacer l'icône du menu hamburger vers la fin de la disposition flex sur les petits écrans */
+  }
+
+  /* Styles pour le menu responsive visible sur les écrans plus petits */
+  #topnav_responsive_menu {
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 100%; /* Position en dessous de l'en-tête */
+    background-color: #f8f8f8;
+    padding: 10px;
+  }
+
+  #topnav_responsive_menu ul {
+    flex-direction: column;
+  }
+
+  #topnav_responsive_menu li {
+    margin: 10px 0;
+  }
+}

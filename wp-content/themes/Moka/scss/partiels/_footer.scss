@@ -1,0 +1,22 @@
+/* Style pour le menu Footer */
+
+.menu-footer-menu-container ul {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 86px;
+  border-top: 1px black solid;
+}
+
+.menu-footer-menu-container li {
+  list-style: none;
+}
+
+.menu-footer-menu-container a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: black;
+  font-size: 16px;
+}
