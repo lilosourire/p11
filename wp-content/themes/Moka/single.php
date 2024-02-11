@@ -19,7 +19,7 @@ get_header();
 $photo_url = get_field('photo');
 $reference = get_field('reference');
 $type = get_field('type');
-$year = get_field('annee');
+$annee = get_field('annee');
 $categories = get_the_terms(get_the_ID(), 'categorie');
 $formats = get_the_terms(get_the_ID(), 'format');
 // /création du tableau des categories
@@ -47,17 +47,10 @@ $category_name = $categories[0]->name;
                 <!-- Affichage des informations sur la photo (Référence, Catégorie, Format, Type, Année) -->
                 <div class="taxonomies">
                     <p>RÉFÉRENCE : <span id="single-reference"><?php echo strtoupper($reference) ?></span></p>
-                    <p>CATÉGORIE : <?php foreach ($categories as $key => $cat) {
-                                        $categoryNameSingle = $cat->name;
-                                        echo strtoupper($categoryNameSingle);
-                                    }  ?></p>
-                    <p>FORMAT : <?php foreach ($formats as $key => $format) {
-                    $formatName = isset($format['name']) ? $format['name'] : '';
-
-                                    echo strtoupper($formatName);
-                                } ?></p>
+                    <p>CATÉGORIE : <?php foreach ($categories as $key => $cat) {$categoryNameSingle = $cat->name; echo strtoupper($categoryNameSingle);}  ?></p>
+                    <p>FORMAT : <?php foreach ($formats as $key => $format) {    $formatName = isset($format->name) ? $format->name : '';    echo strtoupper($formatName);} ?></p>
                     <p>TYPE : <?php echo strtoupper($type) ?> </p>
-                    <p>ANNÉE : <?php echo $year ?> </p>
+                    <p>ANNÉE : <?php echo $annee ?> </p>
                 </div>
             </div>
         </div>
