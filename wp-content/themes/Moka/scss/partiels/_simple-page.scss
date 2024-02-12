@@ -1,0 +1,179 @@
+/* Styles pour la page */
+/* Styles pour le reste de la page */
+
+.cataloguePhotos {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+}
+
+/* Container pour les informations détaillées */
+.infos {
+  width: 50%;
+  padding: 20px;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%; /* Ajustez selon vos besoins */
+}
+/* Affichage des informations sur la photo */
+.taxonomies {
+  display: flex;
+  flex-direction: column;
+  // margin-top: auto; /* Pour aligner en bas de la section */
+}
+
+/* Trait gris en dessous du texte */
+.taxonomies::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background-color: #000000;
+  margin-top: 10px; /* Ajustez la marge selon vos besoins */
+}
+/* Container pour l'image principale */
+.galleryPhotos {
+  width: 50%;
+  height: 100%;
+  position: relative; /* Ajout d'une position relative */
+}
+
+/* Container pour l'image principale */
+.detailPhoto {
+  width: 50%;
+}
+
+/* Affichage de l'image principale */
+.containerPhoto {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.containerPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay pour l'effet de survol */
+.singlePhotoOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0;
+  transition: background-color 0.3s, opacity 0.3s;
+  cursor: pointer;
+}
+
+.singlePhotoOverlay:hover {
+  opacity: 0.8;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Bouton plein écran */
+.fullscreen-icon {
+  display: none;
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  width: 34px;
+  height: 34px;
+}
+
+.containerPhoto:hover .fullscreen-icon {
+  display: block;
+}
+
+/* Styles pour le reste de la page */
+.contenairContact {
+  width: 100%;
+  display: flex;
+  // justify-content: flex-end; /* Aligne les éléments sur le côté droit */
+  border-bottom: solid black 1px;
+  padding: 20px;
+}
+
+.contactContent {
+  display: flex;
+  // flex-direction: column;
+  align-items: flex-start; /* Aligne les éléments sur le côté gauche */
+}
+
+#contact-modale {
+  width: 272px;
+  height: 50px;
+  line-height: 100%;
+  background-color: #d8d8d8;
+  font-family: space_monoregular;
+  font-weight: 400;
+  font-size: 12px;
+  border-radius: 2px;
+  border: none;
+  margin-left: 250px;
+}
+
+#contact-modale:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+
+/* Section pour afficher des photos similaires */
+.related-photos {
+  max-width: 80%;
+  margin: 0 auto;
+  margin-bottom: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.titleSugest {
+  width: 100%;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.related-photo-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.related-photo {
+  width: calc(
+    50% - 10px
+  ); /* 50% de largeur avec un espacement entre les éléments */
+  box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.related-photo img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
+
+.photoNotFound {
+  font-family: PoppinsRegular;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Votre CSS existant */
+.related-photo p {
+  display: none;
+}

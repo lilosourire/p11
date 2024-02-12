@@ -25,43 +25,48 @@ $formats = get_the_terms(get_the_ID(), 'format');
 // /création du tableau des categories
 $category_name = $categories[0]->name;
 ?>
-<!-- Structure principale pour afficher la photo et les détails -->
 <section class="cataloguePhotos">
-    <div class="galleryPhotos">
-        <div class="detailPhoto">
-            <!-- Affichage de l'image principale -->
-            <div class="containerPhoto">
-                <img src="<?php echo $photo_url; ?>" alt="<?php the_title_attribute(); ?>">
-                <!-- Overlay pour l'effet de survol -->
-                <div class="singlePhotoOverlay">
-                    <!-- Bouton plein écran avec des données personnalisées pour la popup -->
-                    <div class="fullscreen-icon" data-reference="<?php echo esc_attr($reference); ?>" data-full="<?php echo esc_url($photo_url); ?>" data-category="<?php echo esc_attr($category_name); ?>">
-                        <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/fullscreen.svg" alt="Icone fullscreen">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Informations détaillées sur la photo -->
-            <div class="selecteurK">
-                <h2><?php echo get_the_title(); ?></h2>
-                <!-- Affichage des informations sur la photo (Référence, Catégorie, Format, Type, Année) -->
-                <div class="taxonomies">
-                    <p>RÉFÉRENCE : <span id="single-reference"><?php echo strtoupper($reference) ?></span></p>
-                    <p>CATÉGORIE : <?php foreach ($categories as $key => $cat) {$categoryNameSingle = $cat->name; echo strtoupper($categoryNameSingle);}  ?></p>
-                    <p>FORMAT : <?php foreach ($formats as $key => $format) {    $formatName = isset($format->name) ? $format->name : '';    echo strtoupper($formatName);} ?></p>
-                    <p>TYPE : <?php echo strtoupper($type) ?> </p>
-                    <p>ANNÉE : <?php echo $annee ?> </p>
-                </div>
-            </div>
-        </div>
+  <div class="infos">
+    <h2><?php echo get_the_title(); ?></h2>
+    <!-- Affichage des informations sur la photo (Référence, Catégorie, Format, Type, Année) -->
+    <div class="taxonomies">
+      <p>RÉFÉRENCE : <span id="single-reference"><?php echo strtoupper($reference) ?></span></p>
+      <p>CATÉGORIE : <?php foreach ($categories as $key => $cat) { $categoryNameSingle = $cat->name; echo strtoupper($categoryNameSingle); } ?></p>
+      <p>FORMAT : <?php foreach ($formats as $key => $format) { $formatName = isset($format->name) ? $format->name : ''; echo strtoupper($formatName); } ?></p>
+      <p>TYPE : <?php echo strtoupper($type) ?> </p>
+      <p>ANNÉE : <?php echo $annee ?> </p>
     </div>
+  </div>
+
+  <!-- Container pour l'image principale -->
+  <div class="detailPhoto">
+    <div class="containerPhoto">
+      <!-- Affichage de l'image principale -->
+      <img src="<?php echo $photo_url; ?>" alt="<?php the_title_attribute(); ?>">
+      <!-- Overlay pour l'effet de survol -->
+      <div class="singlePhotoOverlay">
+        <!-- Bouton plein écran avec des données personnalisées pour la popup -->
+        <div class="fullscreen-icon" data-reference="<?php echo esc_attr($reference); ?>" data-full="<?php echo esc_url($photo_url); ?>" data-category="<?php echo esc_attr($category_name); ?>">
+          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/fullscreen.svg" alt="Icone fullscreen">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Section pour le bouton de contact -->
+<section class="contenairContact">
+  <div class="contactContent">
+    <p>Cette photo vous intéresse?</p>
+    <button id="contact-modale" data-reference="<?php echo $reference; ?>">Contact</button>
+  </div>
+</section>
+
 
     <!-- Section de contact et navigation entre les photos -->
-    <div class="contenairContact">
-        <div class="contact">
-            <!-- Bouton pour ouvrir la popup de contact -->
-            <button id="boutonContact" data-reference="<?php echo esc_attr($reference); ?>">Contact</button>
-        </div>
+
+
         <div class="naviguationPhotos">
             <!-- Conteneur pour la navigation entre les photos -->
             <div class="miniPicture" id="miniPicture">
@@ -71,45 +76,69 @@ $category_name = $categories[0]->name;
             <div class="naviguationArrow">
                 <!-- Flèche gauche pour la photo précédente -->
                 <?php if (!empty($previousPost)) : ?>
-                    <img class="arrow arrow-left" src="<?php echo get_theme_file_uri() . '/assets/images/left.png'; ?>" alt="Photo précédente" data-thumbnail-url="<?php echo $previousThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($previousPost->ID)); ?>">
+                    <img class="arrow arrow-left" src="<?php echo get_theme_file_uri() . '/moka/image/imagewebp/left.png'; ?>" alt="Photo précédente" data-thumbnail-url="<?php echo $previousThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($previousPost->ID)); ?>">
                 <?php endif; ?>
                 <!-- Flèche droite pour la photo suivante -->
                 <?php if (!empty($nextPost)) : ?>
-                    <img class="arrow arrow-right" src="<?php echo get_theme_file_uri() . '/assets/images/right.png'; ?>" alt="Photo suivante" data-thumbnail-url="<?php echo $nextThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($nextPost->ID)); ?>">
+                    <img class="arrow arrow-right" src="<?php echo get_theme_file_uri() . '/moka/image/imagewebp/right.png'; ?>" alt="Photo suivante" data-thumbnail-url="<?php echo $nextThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($nextPost->ID)); ?>">
                 <?php endif; ?>
             </div>
         </div>
-    </div>
+
 </section>
 
-<!-- Section pour afficher des photos similaires -->
-<!-- <section>
+ <!-- Section pour afficher des photos similaires -->
+ <section>
     <div class="titreVousAimerezAussi">
         <h3>VOUS AIMEREZ AUSSI</h3>
     </div>
-
-    <div class="PhotoSimilaire">
+    <section class="related-photos">
+    <div class="related-photo-container">
         <?php
-        // Requête pour obtenir des photos similaires
-        // $related_photos = get_related_photos();
-        // if ($related_photos->have_posts()) {
-        //     while ($related_photos->have_posts()) {
-        //         $related_photos->the_post();
-        //         get_template_part('template-parts/photo_block');
-        //     }
-            // Réinitialisation des données de la requête principale
-            // wp_reset_postdata();
-        // } else {
-            // Aucune photo similaire trouvée
-        //     echo "<p class='photoNotFound'> Pas de photo similaire trouvée pour la catégorie ''" . $category_name . "'' </p>";
-        // }
-        // ?>
-    </div>
+        // Récupération des catégories de la photo principale
+        $categories = get_the_terms(get_the_ID(), 'categorie');
 
-    <!-- Bouton pour afficher toutes les photos -->
-    <!-- <button id="toutesLesPhotos" class="bouton">
-        <a href="<?php echo home_url(); ?>#containerPhoto">Toutes les photos</a>
-    </button>
-</section>  -->
+        // Arguments de la requête pour récupérer les photos apparentées
+        $args = array(
+            'post_type' => 'photos',
+            'posts_per_page' => 3, // Vous pouvez ajuster le nombre de photos à afficher
+            'post__not_in' => array(get_the_ID()),
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'categorie',
+                    'field' => 'id',
+                    'terms' => $categories ? wp_list_pluck($categories, 'term_id') : array(),
+                ),
+            ),
+        );
+        $query = new WP_Query($args);
+
+        // Vérifie si des photos apparentées ont été trouvées
+        if ($query->have_posts()) :
+            // Boucle à travers les photos apparentées
+            while ($query->have_posts()) : $query->the_post();
+                // Récupération de l'URL de la photo et de la référence
+                $photo_url = get_field('photo');
+                $reference = get_field('reference');
+        ?>
+                <!-- Conteneur pour chaque photo apparentée -->
+                <div class="related-photo">
+                    <!-- Image de la photo apparentée -->
+                    <img src="<?php echo esc_url($photo_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
+                    <!-- Référence de la photo apparentée -->
+                    <p>RÉF. PHOTO: <?php echo strtoupper($reference); ?></p>
+                </div>
+        <?php
+            endwhile;
+            // Réinitialise les données de la requête
+            wp_reset_postdata();
+        else :
+            // Affiche un message si aucune photo apparentée n'est trouvée
+            echo '<p class="photoNotFound">Pas de photo apparentée trouvée pour la catégorie.</p>';
+        endif;
+        ?>
+    </div>
+</section>
+
 
 <?php get_footer(); ?>

@@ -3,7 +3,7 @@
     <!-- La div interne qui contient le contenu de la modale -->
     <div class="popup-contact">
         <!-- Appel de l'image du formulaire de contact  -->
-        <img src="<?php echo '../image/imagewebp/Contact-header.png'; ?>" alt="bandeau contact">
+        <img src="<?php echo '../Moka/image/imagewebp/Contact-header.png'; ?>" alt="bandeau contact">
         
         <!-- Appel au formulaire de contact via l'extension Contact Form 7 avec l'ID du formulaire -->
         <?php

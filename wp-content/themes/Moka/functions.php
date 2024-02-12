@@ -30,3 +30,27 @@ add_action('after_setup_theme', 'mota_setup');
 
     }
     add_action('wp_enqueue_scripts', 'script_JS_Custo');
+
+    function get_related_photos($categories) {
+        if ($categories && !is_wp_error($categories)) {
+            $category_ids = wp_list_pluck($categories, 'term_id');
+            $args = array(
+                'post_type' => 'photos',
+                'posts_per_page' => 2,
+                'orderby' => 'rand',
+                'post__not_in' => array(get_the_ID()),
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'categorie',
+                        'field' => 'term_id',
+                        'terms' => $category_ids,
+                    ),
+                ),
+            );
+    
+            return new WP_Query($args);
+        }
+    
+        return false;
+    }
+    
