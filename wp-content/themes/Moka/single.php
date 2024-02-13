@@ -41,17 +41,33 @@ $category_name = $categories[0]->name;
   <!-- Container pour l'image principale -->
   <div class="detailPhoto">
     <div class="containerPhoto">
-      <!-- Affichage de l'image principale -->
-      <img src="<?php echo $photo_url; ?>" alt="<?php the_title_attribute(); ?>">
-      <!-- Overlay pour l'effet de survol -->
-      <div class="singlePhotoOverlay">
-        <!-- Bouton plein écran avec des données personnalisées pour la popup -->
-        <div class="fullscreen-icon" data-reference="<?php echo esc_attr($reference); ?>" data-full="<?php echo esc_url($photo_url); ?>" data-category="<?php echo esc_attr($category_name); ?>">
-          <img src="<?php echo esc_url(get_template_directory_uri()); ?>/assets/images/fullscreen.svg" alt="Icone fullscreen">
+        <!-- Affichage de l'image principale -->
+        <img src="<?php echo $photo_url; ?>" alt="<?php the_title_attribute(); ?>">
+        
+        <!-- Overlay pour l'effet de survol -->
+        <div class="singlePhotoOverlay">
+            <!-- Bouton plein écran en haut à droite -->
+            <div class="fullscreen-icon" data-reference="<?php echo esc_attr($reference); ?>" data-full="<?php echo esc_url($photo_url); ?>" data-category="<?php echo esc_attr($category_name); ?>">
+                <img src="<?php echo esc_url(get_template_directory_uri()); ?>/image/imagewebp/fullscreen.png" alt="Icone fullscreen">
+            </div>
+            
+            <!-- Icône du centre de l'overlay -->
+            <div class="center-icon">
+            <img src="<?php echo esc_url(get_template_directory_uri()); ?>/image/imagewebp/icon_eye.png" alt="Icone oeil">
+
+            </div>
         </div>
-      </div>
     </div>
+    <!-- Conteneur pour la modal plein écran -->
+<div class="fullscreen-modal">
+  <!-- Contenu de la modal (image) -->
+  <div class="fullscreen-content">
+    <img src="" alt="Image en plein écran">
   </div>
+</div>
+
+</div>
+
 </section>
 
 
@@ -66,24 +82,35 @@ $category_name = $categories[0]->name;
 
     <!-- Section de contact et navigation entre les photos -->
 
+<!-- Conteneur pour la navigation entre les photos -->
+<div class="naviguationPhotos">
+    <!-- Miniatures des photos (chargées dynamiquement par JavaScript) -->
+    <div class="miniPicture" id="miniPicture">
+        <!-- Les miniatures seront chargées dynamiquement par JavaScript -->
+    </div>
 
-        <div class="naviguationPhotos">
-            <!-- Conteneur pour la navigation entre les photos -->
-            <div class="miniPicture" id="miniPicture">
-                <!-- Les miniatures seront chargées dynamiquement par JavaScript -->
-            </div>
-            <!-- Flèches de navigation entre les photos -->
-            <div class="naviguationArrow">
-                <!-- Flèche gauche pour la photo précédente -->
+
+<!-- Flèches de navigation entre les photos -->
+<div class="naviguationArrow">
+    <?php if (!empty($previousPost)) : ?>
+        <img class="arrow arrow-left" src="<?php echo get_theme_file_uri() . '/image/imagewebp/gauche.png'; ?>" alt="Photo précédente" data-target-url="<?php echo esc_url(get_permalink($previousPost->ID)); ?>">
+    <?php endif; ?>
+
+    <?php if (!empty($nextPost)) : ?>
+        <img class="arrow arrow-right" src="<?php echo get_theme_file_uri() . '/image/imagewebp/droite.png'; ?>" alt="Photo suivante" data-target-url="<?php echo esc_url(get_permalink($nextPost->ID)); ?>">
+    <?php endif; ?>
+</div>
+<div class="naviguationArrow">
                 <?php if (!empty($previousPost)) : ?>
-                    <img class="arrow arrow-left" src="<?php echo get_theme_file_uri() . '/moka/image/imagewebp/left.png'; ?>" alt="Photo précédente" data-thumbnail-url="<?php echo $previousThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($previousPost->ID)); ?>">
+                    <img class="arrow arrow-left" src="<?php echo get_theme_file_uri() . '/image/imagewebp/gauche.png'; ?>" alt="Photo précédente" data-thumbnail-url="<?php echo $previousThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($previousPost->ID)); ?>">
                 <?php endif; ?>
-                <!-- Flèche droite pour la photo suivante -->
+
                 <?php if (!empty($nextPost)) : ?>
-                    <img class="arrow arrow-right" src="<?php echo get_theme_file_uri() . '/moka/image/imagewebp/right.png'; ?>" alt="Photo suivante" data-thumbnail-url="<?php echo $nextThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($nextPost->ID)); ?>">
+                    <img class="arrow arrow-right" src="<?php echo get_theme_file_uri() . '/image/imagewebp/droite.png'; ?>" alt="Photo suivante" data-thumbnail-url="<?php echo $nextThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($nextPost->ID)); ?>">
                 <?php endif; ?>
             </div>
-        </div>
+ 
+</div>
 
 </section>
 
@@ -101,7 +128,7 @@ $category_name = $categories[0]->name;
         // Arguments de la requête pour récupérer les photos apparentées
         $args = array(
             'post_type' => 'photos',
-            'posts_per_page' => 3, // Vous pouvez ajuster le nombre de photos à afficher
+            'posts_per_page' => 2, // Vous pouvez ajuster le nombre de photos à afficher
             'post__not_in' => array(get_the_ID()),
             'tax_query' => array(
                 array(
@@ -117,19 +144,20 @@ $category_name = $categories[0]->name;
         if ($query->have_posts()) :
             // Boucle à travers les photos apparentées
             while ($query->have_posts()) : $query->the_post();
-                // Récupération de l'URL de la photo et de la référence
-                $photo_url = get_field('photo');
-                $reference = get_field('reference');
-        ?>
-                <!-- Conteneur pour chaque photo apparentée -->
-                <div class="related-photo">
-                    <!-- Image de la photo apparentée -->
-                    <img src="<?php echo esc_url($photo_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
-                    <!-- Référence de la photo apparentée -->
-                    <p>RÉF. PHOTO: <?php echo strtoupper($reference); ?></p>
-                </div>
-        <?php
-            endwhile;
+            // Récupération de l'URL de la photo et de la référence
+            $photo_url = get_field('photo');
+            $reference = get_field('reference');
+            $photo_link = esc_url(get_permalink());
+        
+            // Conteneur pour chaque photo apparentée avec un lien vers la page de la photo
+            echo '<a href="' . $photo_link . '" class="related-photo">';
+            echo '  <!-- Image de la photo apparentée -->';
+            echo '  <img src="' . esc_url($photo_url) . '" alt="' . esc_attr(get_the_title()) . '">';
+            echo '  <!-- Référence de la photo apparentée -->';
+            echo '  <p>RÉF. PHOTO: ' . strtoupper($reference) . '</p>';
+            echo '</a>';
+        endwhile;
+        
             // Réinitialise les données de la requête
             wp_reset_postdata();
         else :

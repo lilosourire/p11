@@ -7,7 +7,9 @@
   
   <!-- Titre de la page -->
   <title> Site NATHALIE MOTA</title>
-  
+  <!-- bibliothèque jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
   <!-- Inclusion des scripts et des styles de WordPress -->
   <?php wp_head()?>
 </head>

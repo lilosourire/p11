@@ -177,3 +177,110 @@
 .related-photo p {
   display: none;
 }
+
+// navigation photo
+/* Styles pour la navigation entre les photos */
+.naviguationPhotos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: aqua;
+  height: 100px;
+}
+
+/* Flèches de navigation */
+.naviguationArrow {
+  display: flex;
+  align-items: center;
+}
+
+.arrow {
+  cursor: pointer;
+  width: 30px; /* Ajustez la taille selon vos besoins */
+  height: 30px;
+  margin: 0 10px; /* Espace entre les flèches */
+}
+
+.arrow img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Conteneur pour la photo actuelle */
+.current-photo {
+  width: 81px;
+  height: 71px;
+  margin: 0 10px; /* Espace entre la photo et les flèches */
+  position: relative;
+}
+
+.current-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
+
+/* Positionnement absolu selon les coordonnées spécifiées */
+.current-photo {
+  position: absolute;
+  top: 1461px;
+  left: 6038px;
+}
+
+/* Overlay pour l'effet de survol pour les photos de la section "Vous aimerez aussi" */
+.related-photo .singlePhotoOverlay {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0;
+  transition: background-color 0.3s, opacity 0.3s;
+  cursor: pointer;
+}
+
+/* Overlay pour l'effet de survol pour les photos de la section "Vous aimerez aussi" */
+.related-photo {
+  position: relative;
+  overflow: hidden;
+}
+
+.related-photo .singlePhotoOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 0;
+  cursor: pointer;
+  transition: background-color 0.3s, opacity 0.3s;
+}
+
+.related-photo:hover .singlePhotoOverlay {
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0.8;
+}
+
+/* Bouton plein écran pour les photos de la section "Vous aimerez aussi" */
+.related-photo .fullscreen-icon {
+  display: none;
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  width: 34px;
+  height: 34px;
+}
+
+.related-photo:hover .fullscreen-icon {
+  display: block;
+}

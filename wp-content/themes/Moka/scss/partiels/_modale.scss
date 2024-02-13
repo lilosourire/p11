@@ -43,6 +43,13 @@
   transition: auto;
 }
 
+body > section:nth-child(5) > footer > div.popup-overlay.open > div > img {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  display: block;
+}
+
 /* Responsive pour le mobile */
 
 @media screen and (max-width: 465px) {
