@@ -19,7 +19,8 @@ get_header();
 $photo_url = get_field('photo');
 $reference = get_field('reference');
 $type = get_field('type');
-$annee = get_field('annee');
+// $annee = get_field('annee');
+$annee = get_the_terms(get_the_ID(), 'annee');
 $categories = get_the_terms(get_the_ID(), 'categorie');
 $formats = get_the_terms(get_the_ID(), 'format');
 // /création du tableau des categories
@@ -34,7 +35,8 @@ $category_name = $categories[0]->name;
       <p>CATÉGORIE : <?php foreach ($categories as $key => $cat) { $categoryNameSingle = $cat->name; echo strtoupper($categoryNameSingle); } ?></p>
       <p>FORMAT : <?php foreach ($formats as $key => $format) { $formatName = isset($format->name) ? $format->name : ''; echo strtoupper($formatName); } ?></p>
       <p>TYPE : <?php echo strtoupper($type) ?> </p>
-      <p>ANNÉE : <?php echo $annee ?> </p>
+      <p>ANNÉE : <?php echo isset($annee[0]->name) ? strtoupper($annee[0]->name) : ''; ?> </p>
+
     </div>
   </div>
 
@@ -109,9 +111,7 @@ $category_name = $categories[0]->name;
                     <img class="arrow arrow-right" src="<?php echo get_theme_file_uri() . '/image/imagewebp/droite.png'; ?>" alt="Photo suivante" data-thumbnail-url="<?php echo $nextThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($nextPost->ID)); ?>">
                 <?php endif; ?>
             </div>
- 
 </div>
-
 </section>
 
  <!-- Section pour afficher des photos similaires -->

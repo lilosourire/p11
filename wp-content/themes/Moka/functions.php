@@ -58,4 +58,24 @@ add_action('after_setup_theme', 'mota_setup');
     
         return false;
     }
-    
+    // création de la function get_random_photo qui récupère une image aléatoire 
+
+function get_random_photo_url() {
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 1,
+        'orderby' => 'rand',
+    );
+
+    $query = new WP_Query($args);
+
+    if ($query->have_posts()) {
+        $query->the_post();
+        $photo_url = get_field('photo');
+        wp_reset_postdata();
+        return $photo_url;
+    }
+
+    // En cas d'erreur, renvoyer une image de remplacement par défaut
+    return get_template_directory_uri() . '/image/imagewebp/nathalie-4.webp';
+}
