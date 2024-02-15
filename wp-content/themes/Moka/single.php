@@ -88,30 +88,42 @@ $category_name = $categories[0]->name;
 <div class="naviguationPhotos">
     <!-- Miniatures des photos (chargées dynamiquement par JavaScript) -->
     <div class="miniPicture" id="miniPicture">
-        <!-- Les miniatures seront chargées dynamiquement par JavaScript -->
+        <?php
+        // Récupération de toutes les photos du site
+        $all_photos_args = array(
+            'post_type' => 'photos',
+            'posts_per_page' => -1,
+        );
+        $all_photos_query = new WP_Query($all_photos_args);
+
+        // Vérification si des photos ont été trouvées
+        if ($all_photos_query->have_posts()) :
+            while ($all_photos_query->have_posts()) : $all_photos_query->the_post();
+                // Récupération de l'URL de la miniature et de l'ID de la photo
+                $thumbnail_url = get_field('photo_thumbnail');
+                $photo_id = get_the_ID();
+
+                // Affichage de la miniature avec un lien vers la page de la photo
+                echo '<a href="' . esc_url(get_permalink()) . '" data-target-id="' . esc_attr($photo_id) . '" class="thumbnail">';
+                echo '  <img src="' . esc_url($thumbnail_url) . '" alt="' . esc_attr(get_the_title()) . '">';
+                echo '</a>';
+            endwhile;
+
+            // Réinitialisation des données de la requête
+            wp_reset_postdata();
+        endif;
+        ?>
     </div>
 
-
-<!-- Flèches de navigation entre les photos -->
-<div class="naviguationArrow">
-    <?php if (!empty($previousPost)) : ?>
-        <img class="arrow arrow-left" src="<?php echo get_theme_file_uri() . '/image/imagewebp/gauche.png'; ?>" alt="Photo précédente" data-target-url="<?php echo esc_url(get_permalink($previousPost->ID)); ?>">
-    <?php endif; ?>
-
-    <?php if (!empty($nextPost)) : ?>
-        <img class="arrow arrow-right" src="<?php echo get_theme_file_uri() . '/image/imagewebp/droite.png'; ?>" alt="Photo suivante" data-target-url="<?php echo esc_url(get_permalink($nextPost->ID)); ?>">
-    <?php endif; ?>
+    <!-- Flèches de navigation entre les photos -->
+    <div class="naviguationArrow">
+        <!-- Flèche gauche -->
+        <img class="arrow arrow-left" src="<?php echo get_theme_file_uri() . '/image/imagewebp/gauche.png'; ?>" alt="Photo précédente">
+        <!-- Flèche droite -->
+        <img class="arrow arrow-right" src="<?php echo get_theme_file_uri() . '/image/imagewebp/droite.png'; ?>" alt="Photo suivante">
+    </div>
 </div>
-<div class="naviguationArrow">
-                <?php if (!empty($previousPost)) : ?>
-                    <img class="arrow arrow-left" src="<?php echo get_theme_file_uri() . '/image/imagewebp/gauche.png'; ?>" alt="Photo précédente" data-thumbnail-url="<?php echo $previousThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($previousPost->ID)); ?>">
-                <?php endif; ?>
 
-                <?php if (!empty($nextPost)) : ?>
-                    <img class="arrow arrow-right" src="<?php echo get_theme_file_uri() . '/image/imagewebp/droite.png'; ?>" alt="Photo suivante" data-thumbnail-url="<?php echo $nextThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($nextPost->ID)); ?>">
-                <?php endif; ?>
-            </div>
-</div>
 </section>
 
  <!-- Section pour afficher des photos similaires -->

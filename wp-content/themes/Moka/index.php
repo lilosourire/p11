@@ -7,15 +7,21 @@
 
 </head>
 <?php get_header(); ?>    
-<!-- //section hero header image + titre -->
 <body>
-
-
+  <!-- //section hero header image + titre -->
 <section class="hero" style="background-image: url('<?php echo get_random_photo_url(); ?>');">
     <div class="titre-hero"> 
     <img src="<?php echo esc_url(get_template_directory_uri()); ?>/image/imagewebp/titreheader.png" alt="logo du titre">
     </div>
 </section>
+<!-- Nouvelle section pour afficher les photos carrées -->
+<section class="square-photos">
+    <div class="square-photo-container">
+        <!-- Les photos carrées seront ajoutées ici dynamiquement -->
+    </div>
+    <button class="load-more-button">Charger plus</button>
+</section>
+
 
 
 
