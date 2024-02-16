@@ -759,6 +759,30 @@ body > section.cataloguePhotos > div.infos > h2 {
   transition: auto;
 }
 
+.banner {
+  height: 900px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+@media screen and (max-width: 770px) {
+  .banner {
+    height: 250px;
+  }
+}
+.banner img {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: absolute;
+  top: 3px;
+}
+
 /* Appliquer les animations aux éléments concernés */
 /* Nouvelle section pour afficher des photos carrées */
 .square-photos {

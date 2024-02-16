@@ -8,26 +8,27 @@
 </head>
 <?php get_header(); ?>    
 <body>
+
+  <div class="banner">
+  <img src="<?php echo esc_url(get_template_directory_uri()) . '/image/imagewebp/titreheader.png'; ?>" alt="logo du titre">
   <?php
-  // Récupérer les images depuis le champ ACF 'photo'
-  $photos = get_field('photo');
+  $photo_args = array(
+      'post_type' => 'photos',
+      'posts_per_page' => 1,
+      'orderby' => 'rand',
+  );
 
-  // Vérifier si des images existent
-  if ($photos) {
-    // Sélectionner une image aléatoire
-    $random_index = array_rand($photos);
-    $random_photo = $photos[$random_index];
+  $photo_query = new WP_Query($photo_args);
 
-    // Utiliser l'URL de l'image aléatoire comme fond d'écran
-    ?>
-    <section class="hero" style="background-image: url('<?php echo esc_url($random_photo['url']); ?>');">
-      <div class="titre-hero">
-        <img src="<?php echo esc_url(get_template_directory_uri()) . '/image/imagewebp/titreheader.png'; ?>" alt="logo du titre">
-      </div>
-    </section>
-    <?php
+  if ($photo_query->have_posts()) {
+      while ($photo_query->have_posts()) {
+          $photo_query->the_post();
+          echo get_the_post_thumbnail(get_the_ID(), 'full'); 
+      }
+      wp_reset_postdata();
   }
   ?>
+</div>
 <!-- Nouvelle section pour afficher les photos carrées -->
 <section class="square-photos">
     <div class="square-photo-container">
