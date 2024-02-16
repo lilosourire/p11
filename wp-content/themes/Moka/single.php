@@ -10,22 +10,28 @@
  */ -->
 
 <?php
-
 get_header();
 ?>
-
 <!-- déclaration des variables pour la récupération des éléments dans ACF + les éléments des taxonomies -->
 <?php
 $photo_url = get_field('photo');
 $reference = get_field('reference');
 $type = get_field('type');
-// $annee = get_field('annee');
+// taxonomy
 $annee = get_the_terms(get_the_ID(), 'annee');
 $categories = get_the_terms(get_the_ID(), 'categorie');
 $formats = get_the_terms(get_the_ID(), 'format');
 // /création du tableau des categories
 $category_name = $categories[0]->name;
+// mise en place des posts précédents et suivant pour la navigation entre les photos
+// Définissez les URLs des vignettes pour le post précédent et suivant
+$nextPost = get_next_post();
+$previousPost = get_previous_post();
+$previousThumbnailURL = $previousPost ? get_the_post_thumbnail_url($previousPost->ID, 'thumbnail') : '';
+$nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumbnail') : '';
 ?>
+
+
 <section class="cataloguePhotos">
   <div class="infos">
     <h2><?php echo get_the_title(); ?></h2>
@@ -84,38 +90,26 @@ $category_name = $categories[0]->name;
 
 
 
-
-    <!-- Section de contact et navigation entre les photos -->
     <!-- // Récupération des posts précédent et suivant -->
-    <?php
-$previousPost = get_previous_post();
-$nextPost = get_next_post();
-
-// Récupération des miniatures des photos précédente et suivante
-$previousThumbnailURL = get_field('photo_thumbnail', $previousPost->ID);
-$nextThumbnailURL = get_field('photo_thumbnail', $nextPost->ID);
-?>
-<!-- Section de navigation et de contact -->
-<section class="navigation-and-contact">
-    <!-- Conteneur pour la navigation entre les photos -->
     <div class="naviguationPhotos">
-        <!-- Miniature prévisualisée -->
-        <div id="miniature-preview-container">
-            <img id="miniature-preview" alt="Miniature prévisualisée">
+<!-- Conteneur pour la miniature -->
+        <div class="miniPicture" id="miniPicture">
+  <!-- La miniature sera chargée ici par JavaScript -->
         </div>
 
-        <!-- Flèches de navigation entre les photos -->
         <div class="naviguationArrow">
             <?php if (!empty($previousPost)) : ?>
-                <img class="arrow arrow-left" src="<?php echo get_theme_file_uri() . '/image/imagewebp/gauche.png'; ?>" alt="Photo précédente" data-thumbnail-url="<?php echo $previousThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($previousPost->ID)); ?>">
+            <img class="arrow arrow-left" src="<?php echo get_theme_file_uri() . '/image/imagewebp/gauche.png'; ?>" alt="Photo précédente" data-thumbnail-url="<?php echo $previousThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($previousPost->ID)); ?>">
             <?php endif; ?>
 
             <?php if (!empty($nextPost)) : ?>
-                <img class="arrow arrow-right" src="<?php echo get_theme_file_uri() . '/image/imagewebp/droite.png'; ?>" alt="Photo suivante" data-thumbnail-url="<?php echo $nextThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($nextPost->ID)); ?>">
+            <img class="arrow arrow-right" src="<?php echo get_theme_file_uri() . '/image/imagewebp/droite.png'; ?>" alt="Photo suivante" data-thumbnail-url="<?php echo $nextThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($nextPost->ID)); ?>">
             <?php endif; ?>
         </div>
+
     </div>
-</section>
+
+
 
 
 
