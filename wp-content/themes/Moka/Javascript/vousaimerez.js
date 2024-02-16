@@ -34,7 +34,6 @@ console.log("vous aimerez js est chargé");
 //     });
 //   });
 // });
-
 console.log("vous aimerez js est chargé");
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -46,8 +45,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var eyeIcon = document.createElement("div");
     eyeIcon.className = "center-icon";
-    eyeIcon.innerHTML =
-      '<img src="<?php echo esc_url(get_template_directory_uri()); ?>/image/imagewebp/icon_eye.png" alt="Icone oeil">';
+
+    var eyeImage = document.createElement("img");
+    eyeImage.src = "../image/imagewebp/icon_eye.png"; // Modifier le chemin ici
+    eyeImage.alt = "Icone oeil";
+
+    eyeIcon.appendChild(eyeImage);
     overlay.appendChild(eyeIcon);
 
     container.appendChild(overlay);
@@ -60,8 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
       // Afficher le bouton plein écran
       var fullscreenIcon = document.createElement("div");
       fullscreenIcon.className = "fullscreen-icon";
-      fullscreenIcon.innerHTML =
-        '<img src="<?php echo esc_url(get_template_directory_uri()); ?>/image/imagewebp/fullscreen.png" alt="Icone fullscreen">';
+
+      var fullscreenImage = document.createElement("img");
+      fullscreenImage.src = "../image/imagewebp/fullscreen.png"; // Modifier le chemin ici
+      fullscreenImage.alt = "Icone fullscreen";
+
+      fullscreenIcon.appendChild(fullscreenImage);
       container.appendChild(fullscreenIcon);
     });
 

@@ -20,6 +20,14 @@ function mota_setup() {
 }
 add_action('after_setup_theme', 'mota_setup');
 
+// Ajout du support pour les miniatures (post-thumbnails)
+// function theme_support_post_thumbnails()
+// {
+//     add_theme_support('post-thumbnails');
+// }
+// add_action('after_setup_theme', 'theme_support_post_thumbnails');
+
+
 // appel des différents éléments en js:
     function script_JS_Custo()
     {
@@ -82,3 +90,37 @@ function get_random_photo_url() {
     // En cas d'erreur, renvoyer une image de remplacement par défaut
     return get_template_directory_uri() . '/image/imagewebp/nathalie-4.webp';
 }
+
+
+
+
+// navigation
+
+// Ajouter la prise en charge d'Ajax
+add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
+wp_enqueue_script('jquery'); // Assurez-vous que jQuery est chargé
+wp_enqueue_script('custom-scripts', get_template_directory_uri() . '/js/custom-scripts.js', array('jquery'), '1.0', true);
+wp_localize_script('custom-scripts', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
+
+
+function theme_enqueue_scripts() {
+    wp_enqueue_script('custom-scripts', get_template_directory_uri() . '/js/custom-scripts.js', array('jquery'), '1.0', true);
+    wp_localize_script('custom-scripts', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
+}
+
+// Gestionnaire d'action pour récupérer les informations de la miniature via Ajax
+add_action('wp_ajax_get_thumbnail_info', 'get_thumbnail_info');
+add_action('wp_ajax_nopriv_get_thumbnail_info', 'get_thumbnail_info');
+
+function get_thumbnail_info() {
+    $page_id = $_POST['page_id'];
+    $thumbnail_url = get_field('photo_thumbnail', $page_id);
+    $thumbnail_alt = get_post_meta($page_id, '_wp_attachment_image_alt', true);
+
+    if ($thumbnail_url) {
+        wp_send_json_success(array('thumbnail_url' => $thumbnail_url, 'thumbnail_alt' => $thumbnail_alt));
+    } else {
+        wp_send_json_error('Erreur lors de la récupération des informations de la miniature.');
+    }
+}
+
