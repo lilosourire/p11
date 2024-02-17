@@ -1,14 +1,4 @@
 @charset "UTF-8";
-@keyframes fadeInFromBottom {
-  from {
-    top: 100%;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
-}
 /* Style pour le menu Header */
 body {
   background: white;
@@ -488,7 +478,6 @@ body > section.cataloguePhotos > div.infos > h2 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 100px;
 }
 
 /* Flèches de navigation */
@@ -642,9 +631,7 @@ body > section.cataloguePhotos > div.infos > h2 {
 /* Styles pour la navigation entre les photos */
 .naviguationPhotos {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-top: 20px;
 }
 
 .miniPicture {
@@ -796,11 +783,28 @@ body > section.cataloguePhotos > div.infos > h2 {
   justify-content: center;
   align-items: center;
   position: relative;
+  text-align: center;
 }
 
-@media screen and (max-width: 770px) {
-  .banner {
-    height: 250px;
+.banner-logo {
+  background-color: red;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Centrer horizontalement */
+  opacity: 0; /* Définir l'opacité initiale à 0 */
+  animation: fadeInFromTop 2s ease-in-out forwards; /* Animation de 4 secondes avec un effet ease-in-out et forwards pour rester fixe */
+  z-index: 3;
+}
+
+@keyframes fadeInFromTop {
+  from {
+    top: -100%; /* Déplacer l'image de 100% vers le haut pour la faire disparaître */
+    opacity: 0;
+  }
+  to {
+    top: calc(50% - 30px); /* Ramener l'image au centre moins 30 pixels pour l'emplacement final */
+    opacity: 1;
   }
 }
 .banner img {
@@ -810,11 +814,48 @@ body > section.cataloguePhotos > div.infos > h2 {
   background-position: center;
   -o-object-fit: cover;
      object-fit: cover;
-  position: absolute;
-  top: 3px;
+  top: 100%; /* Déplacer l'image de 100% vers le bas pour la faire disparaître */
+  left: 0;
+  z-index: 2;
+  animation: fadeInFromBottom 4s ease-in-out forwards; /* Animation de 4 secondes avec un effet ease-in-out et forwards pour rester fixe */
 }
 
-/* Appliquer les animations aux éléments concernés */
+@keyframes fadeInFromBottom {
+  from {
+    top: 100%; /* Déplacer l'image de 100% vers le bas pour la faire disparaître */
+    opacity: 0;
+  }
+  to {
+    top: -50px; /* Ramener l'image à 30 pixels du haut pour l'emplacement final */
+    opacity: 1;
+  }
+}
+.banner-logo img {
+  background-color: red;
+  position: absolute;
+  top: 100%; /* Déplacer l'image de 100% vers le bas pour la faire disparaître */
+  left: 50%;
+  transform: translateX(-50%); /* Centrer horizontalement */
+  opacity: 0; /* Définir l'opacité initiale à 0 */
+  animation: fadeInFromBottom 4s ease-in-out forwards; /* Animation de 4 secondes avec un effet ease-in-out et forwards pour rester fixe */
+  z-index: 3;
+}
+
+@keyframes fadeInFromBottom {
+  from {
+    top: 100%; /* Déplacer l'image de 100% vers le bas pour la faire disparaître */
+    opacity: 0;
+  }
+  to {
+    top: calc(50% - 30px); /* Ramener l'image au centre moins 30 pixels pour l'emplacement final */
+    opacity: 1;
+  }
+}
+@media screen and (max-width: 770px) {
+  .banner {
+    height: 250px;
+  }
+}
 /* Style pour la section contenant toutes les photos */
 .all-photos {
   max-width: 80%;
@@ -823,6 +864,7 @@ body > section.cataloguePhotos > div.infos > h2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  flex-direction: row; /* Ajout de cette ligne pour spécifier la direction horizontale */
 }
 
 /* Style pour chaque conteneur de photo */

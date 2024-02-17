@@ -6,54 +6,104 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  text-align: center;
 }
-@media screen and (max-width: 770px) {
-  .banner {
-    height: 250px;
+.banner-logo {
+  background-color: red;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Centrer horizontalement */
+  opacity: 0; /* Définir l'opacité initiale à 0 */
+  animation: fadeInFromTop 2s ease-in-out forwards; /* Animation de 4 secondes avec un effet ease-in-out et forwards pour rester fixe */
+  z-index: 3;
+}
+
+@keyframes fadeInFromTop {
+  from {
+    top: -100%; /* Déplacer l'image de 100% vers le haut pour la faire disparaître */
+    opacity: 0;
+  }
+  to {
+    top: calc(
+      50% - 30px
+    ); /* Ramener l'image au centre moins 30 pixels pour l'emplacement final */
+    opacity: 1;
   }
 }
+// .banner img {
+//   width: 100%;
+//   height: 100%;
+//   background-size: cover;
+//   background-position: center;
+//   object-fit: cover;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   z-index: 2;
+// }
+
 .banner img {
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
   object-fit: cover;
-  position: absolute;
-  top: 3px;
+  // position: absolute;
+  top: 100%; /* Déplacer l'image de 100% vers le bas pour la faire disparaître */
+  left: 0;
+  z-index: 2;
+  animation: fadeInFromBottom 4s ease-in-out forwards; /* Animation de 4 secondes avec un effet ease-in-out et forwards pour rester fixe */
 }
-/* Appliquer les animations aux éléments concernés */
-// ce code met les images au bon format mais elles sont en colonne
-// /* Style pour la section contenant toutes les photos */
-// .all-photos {
-//   max-width: 80%;
-//   margin: 0 auto;
-//   margin-bottom: 5%;
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: space-between;
-// }
 
-// /* Style pour chaque conteneur de photo */
-// .all-photo-container {
-//   width: calc(
-//     50% - 10px
-//   ); /* 50% de largeur avec un espacement entre les éléments */
-//   box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur */
-//   text-align: center;
-//   margin-bottom: 20px;
-// }
+@keyframes fadeInFromBottom {
+  from {
+    top: 100%; /* Déplacer l'image de 100% vers le bas pour la faire disparaître */
+    opacity: 0;
+  }
+  to {
+    top: -50px; /* Ramener l'image à 30 pixels du haut pour l'emplacement final */
+    opacity: 1;
+  }
+}
 
-// /* Style pour chaque photo */
-// .all-photo img {
-//   width: 100%;
-//   height: auto;
-//   object-fit: cover;
-//   aspect-ratio: 1 / 1; /* Garantit que l'image conserve un ratio carré */
-// }
+.banner-logo img {
+  background-color: red;
+  position: absolute;
+  top: 100%; /* Déplacer l'image de 100% vers le bas pour la faire disparaître */
+  left: 50%;
+  transform: translateX(-50%); /* Centrer horizontalement */
+  opacity: 0; /* Définir l'opacité initiale à 0 */
+  animation: fadeInFromBottom 4s ease-in-out forwards; /* Animation de 4 secondes avec un effet ease-in-out et forwards pour rester fixe */
+  z-index: 3;
+}
 
-// /* Style pour la référence de chaque photo */
-// .all-photo p {
-//   display: none;
+@keyframes fadeInFromBottom {
+  from {
+    top: 100%; /* Déplacer l'image de 100% vers le bas pour la faire disparaître */
+    opacity: 0;
+  }
+  to {
+    top: calc(
+      50% - 30px
+    ); /* Ramener l'image au centre moins 30 pixels pour l'emplacement final */
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .banner {
+    height: 250px;
+  }
+}
+
+// /* Style pour le logo */
+// .logo-mota {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   max-width: 100%; /* Assure que le logo ne dépasse pas la taille du conteneur parent */
 // }
 
 /* Style pour la section contenant toutes les photos */

@@ -25,15 +25,13 @@ if (is_array($categories) && !empty($categories)) {
     // Gérez le cas où $categories n'est pas défini ou est vide.
 }?>
 
-  <div class="banner">
-  <img src="<?php echo esc_url(get_template_directory_uri()) . '/image/imagewebp/titreheader.png'; ?>" alt="logo du titre">
-  <?php
+<div class="banner">
+<?php
   $photo_args = array(
       'post_type' => 'photos',
       'posts_per_page' => 1,
       'orderby' => 'rand',
   );
-
   $photo_query = new WP_Query($photo_args);
 
   if ($photo_query->have_posts()) {
@@ -45,6 +43,11 @@ if (is_array($categories) && !empty($categories)) {
   }
   ?>
 </div>
+<!-- le logo-titre -->
+<div id="logo-image" class="banner-logo">
+        <img src="<?php echo esc_url(get_template_directory_uri()) . '/image/imagewebp/titreheader.png'; ?>" alt="logo du titre">
+    </div>
+<!--section pour les filtres  -->
 <!-- Nouvelle section pour afficher les photos carrées -->
 <section class="all-photos">
 <div class="all-photo-container">

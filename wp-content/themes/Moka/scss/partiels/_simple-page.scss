@@ -146,7 +146,7 @@ body > section.cataloguePhotos > div.infos > h2 {
   flex-direction: row;
   align-items: center;
   // background-color: aqua;
-  height: 100px;
+  // height: 100px;
 }
 
 /* Flèches de navigation */
@@ -299,9 +299,9 @@ body > section.cataloguePhotos > div.infos > h2 {
 /* Styles pour la navigation entre les photos */
 .naviguationPhotos {
   display: flex;
-  align-items: center;
+  // align-items: center;
   justify-content: space-between;
-  margin-top: 20px;
+  // margin-top: 20px;
 }
 
 .miniPicture {

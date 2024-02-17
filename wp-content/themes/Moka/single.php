@@ -85,10 +85,6 @@ $nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumb
     <p>Cette photo vous intéresse?</p>
     <button id="contact-modale" data-reference="<?php echo $reference; ?>">Contact</button>
   </div>
-</section>
-
-
-
 
     <!-- // Récupération des posts précédent et suivant -->
     <div class="naviguationPhotos">
@@ -106,9 +102,8 @@ $nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumb
             <img class="arrow arrow-right" src="<?php echo get_theme_file_uri() . '/image/imagewebp/droite.png'; ?>" alt="Photo suivante" data-thumbnail-url="<?php echo $nextThumbnailURL; ?>" data-target-url="<?php echo esc_url(get_permalink($nextPost->ID)); ?>">
             <?php endif; ?>
         </div>
-
     </div>
-
+    </section>
 
 
 
