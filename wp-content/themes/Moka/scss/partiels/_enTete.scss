@@ -52,3 +52,36 @@ header {
   color: black;
   font-size: 16px;
 }
+// menu burger
+.menu-container {
+  text-align: center;
+  padding: 10px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.my-header-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+
+.hamburger-button {
+  cursor: pointer;
+}
+
+/* Styles pour les écrans de petite taille (portable) */
+@media only screen and (max-width: 767px) {
+  .my-header-menu {
+    display: none; /* Masquer le menu initial sur les petits écrans */
+  }
+
+  .my-header-menu.open {
+    display: block; /* Afficher le menu en bloc sur les petits écrans lorsque ouvert */
+  }
+}

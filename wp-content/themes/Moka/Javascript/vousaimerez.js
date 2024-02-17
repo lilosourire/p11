@@ -37,7 +37,7 @@ console.log("vous aimerez js est chargé");
 console.log("vous aimerez js est chargé");
 
 document.addEventListener("DOMContentLoaded", function () {
-  var relatedPhotoContainers = document.querySelectorAll(".related-photo");
+  var relatedPhotoContainers = document.querySelectorAll(".square-photo");
 
   relatedPhotoContainers.forEach(function (container) {
     var overlay = document.createElement("div");

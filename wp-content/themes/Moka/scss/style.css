@@ -65,6 +65,37 @@ header {
   font-size: 16px;
 }
 
+.menu-container {
+  text-align: center;
+  padding: 10px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.my-header-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+
+.hamburger-button {
+  cursor: pointer;
+}
+
+/* Styles pour les écrans de petite taille (portable) */
+@media only screen and (max-width: 767px) {
+  .my-header-menu {
+    display: none; /* Masquer le menu initial sur les petits écrans */
+  }
+  .my-header-menu.open {
+    display: block; /* Afficher le menu en bloc sur les petits écrans lorsque ouvert */
+  }
+}
 /* Styles pour le menu hamburger */
 #IconeMenuBurger {
   width: 30px;
@@ -784,42 +815,34 @@ body > section.cataloguePhotos > div.infos > h2 {
 }
 
 /* Appliquer les animations aux éléments concernés */
-/* Nouvelle section pour afficher des photos carrées */
-.square-photos {
+/* Style pour la section contenant toutes les photos */
+.all-photos {
   max-width: 80%;
   margin: 0 auto;
   margin-bottom: 5%;
-}
-
-.square-photo-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.square-photo {
-  width: calc(25% - 10px); /* 25% de largeur avec un espacement entre les éléments */
+/* Style pour chaque conteneur de photo */
+.all-photo-container {
+  width: calc(50% - 10px); /* 50% de largeur avec un espacement entre les éléments */
   box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur */
   text-align: center;
   margin-bottom: 20px;
 }
 
-.square-photo img {
-  width: 100%;
+/* Style pour chaque photo */
+.all-photo img {
+  width: 100%; /* Utilise 100% de la largeur du conteneur parent */
   height: auto;
   -o-object-fit: cover;
      object-fit: cover;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1/1; /* Garantit que l'image conserve un ratio carré */
 }
 
-/* Bouton "Charger plus" */
-.load-more-button {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+/* Style pour la référence de chaque photo */
+.all-photo p {
+  display: none;
 }/*# sourceMappingURL=style.css.map */

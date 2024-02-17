@@ -22,47 +22,70 @@
   top: 3px;
 }
 /* Appliquer les animations aux éléments concernés */
+// ce code met les images au bon format mais elles sont en colonne
+// /* Style pour la section contenant toutes les photos */
+// .all-photos {
+//   max-width: 80%;
+//   margin: 0 auto;
+//   margin-bottom: 5%;
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: space-between;
+// }
 
-// la section contenant les différents filtres
+// /* Style pour chaque conteneur de photo */
+// .all-photo-container {
+//   width: calc(
+//     50% - 10px
+//   ); /* 50% de largeur avec un espacement entre les éléments */
+//   box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur */
+//   text-align: center;
+//   margin-bottom: 20px;
+// }
 
-// la section d'affichage des photos
-/* Nouvelle section pour afficher des photos carrées */
-.square-photos {
+// /* Style pour chaque photo */
+// .all-photo img {
+//   width: 100%;
+//   height: auto;
+//   object-fit: cover;
+//   aspect-ratio: 1 / 1; /* Garantit que l'image conserve un ratio carré */
+// }
+
+// /* Style pour la référence de chaque photo */
+// .all-photo p {
+//   display: none;
+// }
+
+/* Style pour la section contenant toutes les photos */
+.all-photos {
   max-width: 80%;
   margin: 0 auto;
   margin-bottom: 5%;
-}
-
-.square-photo-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  flex-direction: row; /* Ajout de cette ligne pour spécifier la direction horizontale */
 }
 
-.square-photo {
+/* Style pour chaque conteneur de photo */
+.all-photo-container {
   width: calc(
-    25% - 10px
-  ); /* 25% de largeur avec un espacement entre les éléments */
+    50% - 10px
+  ); /* 50% de largeur avec un espacement entre les éléments */
   box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur */
   text-align: center;
   margin-bottom: 20px;
 }
 
-.square-photo img {
-  width: 100%;
+/* Style pour chaque photo */
+.all-photo img {
+  width: 100%; /* Utilise 100% de la largeur du conteneur parent */
   height: auto;
   object-fit: cover;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 1; /* Garantit que l'image conserve un ratio carré */
 }
 
-/* Bouton "Charger plus" */
-.load-more-button {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+/* Style pour la référence de chaque photo */
+.all-photo p {
+  display: none;
 }
