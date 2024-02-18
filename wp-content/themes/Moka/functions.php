@@ -46,6 +46,8 @@ add_action('after_setup_theme', 'mota_setup');
         wp_enqueue_script('modalePhoto-script', get_stylesheet_directory_uri() . '/javascript/modalePhoto.js', array('jquery'), '1.0', true);
         // appel de la section photo de l'index.php
         wp_enqueue_script('section-index-script', get_stylesheet_directory_uri() . '/javascript/sectionphotoindex.js', array('jquery'), '1.0', true);
+        // appel des filtres
+        wp_enqueue_script('filtres-script', get_stylesheet_directory_uri() . '/javascript/sectionphotoindex.js', array('jquery'), '1.0', true);
 
     }
     add_action('wp_enqueue_scripts', 'script_JS_Custo');

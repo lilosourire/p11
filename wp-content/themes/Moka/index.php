@@ -48,6 +48,28 @@ if (is_array($categories) && !empty($categories)) {
         <img src="<?php echo esc_url(get_template_directory_uri()) . '/image/imagewebp/titreheader.png'; ?>" alt="logo du titre">
     </div>
 <!--section pour les filtres  -->
+<?php
+// Affichage taxonomies
+$taxonomy = [
+    'categorie' => 'CATÉGORIES',
+    'format' => 'FORMATS',
+    'annee' => 'TRIER PAR',
+];
+
+foreach ($taxonomy as $taxonomy_slug => $label) {
+    $terms = get_terms($taxonomy_slug);
+    if ($terms && !is_wp_error($terms)) {
+
+        echo "<select id='$taxonomy_slug' class='custom-select taxonomy-select'>";
+
+        echo "<option value=''>$label</option>";
+        foreach ($terms as $term) {
+            echo "<option value='$term->slug'>$term->name</option>";
+        }
+        echo "</select>";
+    }
+}
+?>
 <!-- Nouvelle section pour afficher les photos carrées -->
 <section class="all-photos">
 <div class="all-photo-container">
