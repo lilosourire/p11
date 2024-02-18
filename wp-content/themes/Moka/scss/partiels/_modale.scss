@@ -48,6 +48,10 @@ body > section:nth-child(5) > footer > div.popup-overlay.open > div > img {
   height: auto;
   margin: 0;
   display: block;
+  background-color: blue;
+}
+#image-modale {
+  background-color: red($color: #f70000);
 }
 
 /* Responsive pour le mobile */

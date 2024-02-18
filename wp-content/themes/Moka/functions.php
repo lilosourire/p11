@@ -32,7 +32,10 @@ add_action('after_setup_theme', 'mota_setup');
     function script_JS_Custo()
     {
         // appel de la page de la modale:
-        wp_enqueue_script('modale-script', get_stylesheet_directory_uri() . '/javascript/modale.js', array('jquery'), '1.0', true);
+        wp_enqueue_script('modale-script', get_stylesheet_directory_uri() . '/javascript/modalemenu.js', array('jquery'), '1.0', true);
+        // appel de la modale du menu:
+        wp_enqueue_script('modale-menu', get_stylesheet_directory_uri() . '/javascript/modale.js', array('jquery'), '1.0', true);
+
         // appel de la page du menu burger:
         wp_enqueue_script('menu-burger-script', get_stylesheet_directory_uri() . '/javascript/menuBurger.js', array('jquery'), '1.0', true);
         // appel de la navigation

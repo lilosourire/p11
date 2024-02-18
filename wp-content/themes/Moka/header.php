@@ -19,13 +19,6 @@
         <div class="logo">
             <?php the_custom_logo(); ?>
         </div>
-        <!-- menue hamburger -->
-        <div class="burgerMenu">
-				<span class="bar"></span>
-				<span class="bar"></span>
-				<span class="bar"></span>
-			</div>
-
 
         <div class="menu-container">
         <div class="menu">

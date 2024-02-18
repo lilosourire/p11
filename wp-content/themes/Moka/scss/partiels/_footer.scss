@@ -20,3 +20,25 @@
   color: black;
   font-size: 16px;
 }
+
+/* Media query pour les écrans avec une largeur maximale de 375px */
+@media screen and (max-width: 400px) {
+  /* Styles spécifiques pour la liste du menu du footer lorsque la largeur de l'écran est inférieure ou égale à 375px */
+  .menu-footer-menu-container ul {
+    flex-direction: column; /* Change la direction en colonne */
+    align-items: center;
+    padding-top: 45px;
+    gap: 8px; /* Centre les éléments */
+  }
+
+  /* Ajuste l'ordre des éléments pour les placer sous la bordure supérieure */
+  .footer-menu li {
+    order: 1;
+    margin-top: 30px;
+  }
+
+  /* Ajuste l'espacement entre les éléments de la liste */
+  .footer-menu li:not(:first-child) {
+    margin-top: 10px;
+  }
+}
