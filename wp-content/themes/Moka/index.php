@@ -77,7 +77,7 @@ foreach ($taxonomy as $taxonomy_slug => $label) {
     // Arguments de la requête pour récupérer toutes les photos
     $args = array(
         'post_type' => 'photos',
-        'posts_per_page' => 8, // -1 pour récupérer tous les articles
+        'posts_per_page' => 8,
     );
     $query = new WP_Query($args);
 
@@ -108,14 +108,16 @@ foreach ($taxonomy as $taxonomy_slug => $label) {
     ?>
 </div>
 </section>
+<div id="blockPlusImage">
+    <div id="imagesContainer">
+        <!-- Conteneur pour afficher les images -->
+    </div>
+    <button id="plusDImage" data-page="1">Charger plus</button>
+</div>
 
-    <button class="load-more-button">Charger plus</button>
-</section>
 
 
 
-
-hello tout le monde?!
 <?php wp_footer(); ?>
 </body>
 <?php get_footer(); ?>

@@ -881,6 +881,8 @@ body > section.cataloguePhotos > div.infos > h2 {
   }
 }
 /* Style pour la section contenant toutes les photos */
+/* Style pour la nouvelle section contenant les photos carrées */
+/* Style pour la nouvelle section contenant les photos carrées */
 .all-photos {
   max-width: 80%;
   margin: 0 auto;
@@ -888,29 +890,60 @@ body > section.cataloguePhotos > div.infos > h2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  flex-direction: row; /* Ajout de cette ligne pour spécifier la direction horizontale */
 }
 
-/* Style pour chaque conteneur de photo */
+/* Style pour chaque conteneur de photo carrée */
 .all-photo-container {
-  width: calc(50% - 10px); /* 50% de largeur avec un espacement entre les éléments */
-  box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur */
+  width: calc(50% - 10px);
+  box-sizing: border-box;
   text-align: center;
   margin-bottom: 20px;
 }
 
-/* Style pour chaque photo */
+/* Style pour chaque photo carrée */
 .all-photo img {
-  width: 100%; /* Utilise 100% de la largeur du conteneur parent */
+  width: 100%;
   height: auto;
   -o-object-fit: cover;
      object-fit: cover;
-  aspect-ratio: 1/1; /* Garantit que l'image conserve un ratio carré */
+  aspect-ratio: 1/1;
 }
 
-/* Style pour la référence de chaque photo */
+/* Style pour la référence de chaque photo carrée */
 .all-photo p {
   display: none;
+}
+
+/* Style pour le bouton "Charger plus" */
+#blockPusdImage {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#plusDImage {
+  width: 150px;
+  height: 40px;
+  line-height: 100%;
+  background-color: #d8d8d8;
+  font-family: space_monoregular;
+  font-weight: 400;
+  font-size: 14px;
+  border-radius: 2px;
+  border: none;
+}
+#plusDImage:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+
+/* Style pour le message "Aucune photo trouvée" */
+.photoNotFound {
+  font-family: PoppinsRegular;
+  font-size: 20px;
+  text-align: center;
+  margin: 20px 0;
 }
 
 /* Ajouter du CSS pour personnaliser Select2 */
