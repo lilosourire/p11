@@ -1,8 +1,8 @@
-console.log("load more est chargé");
-console.log("load more est chargé");
+console.log("Chargement de plus de photos : JS est chargé");
 
-jQuery(function ($) {
+jQuery(document).ready(function ($) {
   // Lorsque le bouton "Charger plus" est cliqué
+
   $("#plusDImage").on("click", function () {
     const page = $(this).data("page");
     const newPage = page + 1;

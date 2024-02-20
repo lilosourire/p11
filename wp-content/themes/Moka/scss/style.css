@@ -971,4 +971,9 @@ body > section.cataloguePhotos > div.infos > h2 {
 .select2-container--default .select2-results__option:not(:first-child)[aria-selected=true] {
   background-color: #e00000 !important;
   color: #fff !important;
+}
+
+#categorie #format #annee:hover {
+  background-color: #fe5858 !important;
+  color: white !important;
 }/*# sourceMappingURL=style.css.map */

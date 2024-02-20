@@ -48,14 +48,21 @@ add_action('after_setup_theme', 'mota_setup');
         wp_enqueue_script('section-index-script', get_stylesheet_directory_uri() . '/javascript/sectionphotoindex.js', array('jquery'), '1.0', true);
         // appel des filtres
         wp_enqueue_script('filtres-script', get_stylesheet_directory_uri() . '/javascript/sectionphotoindex.js', array('jquery'), '1.0', true);
+            // Bibliotheque Select2 pour les selects de tri
+    wp_enqueue_script('select2-js', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js', array('jquery'), '4.0.13', true);
+    wp_enqueue_style('select2-css', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css', array());
         // appel des hoover des filtres
         // wp_enqueue_script('filtres-custom-script', get_stylesheet_directory_uri() . '/javascript/CustomJS.js', array('jquery'), '1.0', true);
 
-        // appel de l'ajax-js du bouton charger plus
+        // Appel de l'ajax-js du bouton charger plus
+    wp_enqueue_script('load-more-photos', get_template_directory_uri() . '/javascript/load-more-photos.js', array('jquery'), null, true);
 
-
-    }
-    add_action('wp_enqueue_scripts', 'script_JS_Custo');
+    // Passer des paramètres AJAX à votre script
+    wp_localize_script('load-more-photos', 'ajax_params', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+    ));
+}
+add_action('wp_enqueue_scripts', 'script_JS_Custo');
 
     function get_related_photos($categories) {
         if ($categories && !is_wp_error($categories)) {
@@ -106,17 +113,7 @@ function get_random_photo_url() {
 
 // navigation
 
-// Ajouter la prise en charge d'Ajax
-add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
-wp_enqueue_script('jquery'); // Assurez-vous que jQuery est chargé
-wp_enqueue_script('custom-scripts', get_template_directory_uri() . '/js/custom-scripts.js', array('jquery'), '1.0', true);
-wp_localize_script('custom-scripts', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
 
-
-function theme_enqueue_scripts() {
-    wp_enqueue_script('custom-scripts', get_template_directory_uri() . '/js/custom-scripts.js', array('jquery'), '1.0', true);
-    wp_localize_script('custom-scripts', 'ajax_object', array('ajax_url' => admin_url('admin-ajax.php')));
-}
 
 // Gestionnaire d'action pour récupérer les informations de la miniature via Ajax
 add_action('wp_ajax_get_thumbnail_info', 'get_thumbnail_info');
@@ -134,7 +131,73 @@ function get_thumbnail_info() {
     }
 }
 
+//ajout des fonctionnalitées pour les filtres
+
+
+function filter_photos_function(){
+
+    $filter = $_POST['filter'];
+
+    $args = array(
+        'post_type' => 'photos',
+        'posts_per_page' => -1,
+        'tax_query' => array(
+            'relation' => 'AND',
+        )
+    );
+
+    // Ajoute chaque filtre a la tax query si elle est definie
+    if(!empty($filter['categorie'])){
+        $args['tax_query'][] = array(
+            'taxonomy' => 'categorie',
+            'field'    => 'slug',
+            'terms'    => $filter['categorie'],
+        );
+    }
+
+    if(!empty($filter['format'])){
+        $args['tax_query'][] = array(
+            'taxonomy' => 'format',
+            'field'    => 'slug',
+            'terms'    => $filter['format'],
+        );
+    }
+
+    if(!empty($filter['annees'])){
+        $args['tax_query'][] = array(
+            'taxonomy' => 'annees',
+            'field'    => 'slug',
+            'terms'    => $filter['annees'],
+        );
+    }
+
+    $query = new WP_Query($args);
+
+    if($query->have_posts()){
+        while($query->have_posts()){
+            $query->the_post();
+
+            get_template_part('template-parts/photo_block', null);
+        }
+        wp_reset_postdata();
+    } else {
+        echo '<p class="critereFiltrage">Aucune photo ne correspond aux criteres de filtrage</p>';
+    }
+
+    die();
+}
+
+add_action('wp_ajax_filter_photos', 'filter_photos_function');
+add_action('wp_ajax_nopriv_filter_photos', 'filter_photos_function');
+
+
+
+
+
 // ajout de fonctionnalité du bouton charger plus
+
+
+
 /* Chargement photos Ajax load more */
 
 // Ajoutez cette fonction dans votre fichier functions.php
@@ -263,18 +326,7 @@ function get_thumbnail_info() {
 // add_action('wp_enqueue_scripts', 'enqueue_load_more_photos_script');
 
 
-// Passer des paramètres AJAX à votre script
-add_action('wp_enqueue_scripts', 'enqueue_load_more_photos_script');
-
-function enqueue_load_more_photos_script() {
-    wp_enqueue_script('load-more-photos', get_template_directory_uri() . '/javascript/load-more-photos.js', array('jquery'), null, true);
-
-    // Passer des paramètres AJAX à votre script
-    wp_localize_script('load-more-photos', 'ajax_params', array(
-        'ajax_url' => admin_url('admin-ajax.php'),
-    ));
-}
-
+// Ajoutez cette fonction dans votre fichier functions.php
 function load_more_photos() {
     $page = $_POST['page'];
     $args = array(
@@ -294,11 +346,23 @@ function load_more_photos() {
         endwhile;
         wp_reset_postdata();
     else :
-        echo 'Aucune photo trouvée.';
+        echo 'no_posts';
     endif;
 
     die(); // N'oubliez pas cette ligne pour terminer le traitement AJAX
 }
 
+// Ajoutez ces actions dans votre fichier functions.php
 add_action('wp_ajax_load_more_photos', 'load_more_photos');
-add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos'); 
+add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
+
+// Ajoutez cette fonction dans votre fichier functions.php
+function enqueue_load_more_photos_script() {
+    wp_enqueue_script('load-more-photos', get_template_directory_uri() . '/javascript/load-more-photos.js', array('jquery'), null, true);
+
+    // Passer des paramètres AJAX à votre script
+    wp_localize_script('load-more-photos', 'ajax_params', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+    ));
+}
+add_action('wp_enqueue_scripts', 'enqueue_load_more_photos_script');
