@@ -109,7 +109,7 @@ $nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumb
 
 
 
-</section>
+<!-- </section> -->
 
  <!-- Section pour afficher des photos similaires -->
  <section>
@@ -117,53 +117,32 @@ $nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumb
         <h3>VOUS AIMEREZ AUSSI</h3>
     </div>
     <section class="related-photos">
-    <div class="related-photo-container">
-        <?php
-        // Récupération des catégories de la photo principale
-        $categories = get_the_terms(get_the_ID(), 'categorie');
+        <div class="related-photo-container">
+            <?php
+            // Récupération des catégories de la photo principale
+            $categories = get_the_terms(get_the_ID(), 'categorie');
 
-        // Arguments de la requête pour récupérer les photos apparentées
-        $args = array(
-            'post_type' => 'photos',
-            'posts_per_page' => 2, // Vous pouvez ajuster le nombre de photos à afficher
-            'post__not_in' => array(get_the_ID()),
-            'tax_query' => array(
-                array(
-                    'taxonomy' => 'categorie',
-                    'field' => 'id',
-                    'terms' => $categories ? wp_list_pluck($categories, 'term_id') : array(),
+            // Arguments de la requête pour récupérer les photos apparentées
+            $args = array(
+                'post_type' => 'photos',
+                'posts_per_page' => 2, // Vous pouvez ajuster le nombre de photos à afficher
+                'post__not_in' => array(get_the_ID()),
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'categorie',
+                        'field' => 'id',
+                        'terms' => $categories ? wp_list_pluck($categories, 'term_id') : array(),
+                    ),
                 ),
-            ),
-        );
-        $query = new WP_Query($args);
+            );
 
-        // Vérifie si des photos apparentées ont été trouvées
-        if ($query->have_posts()) :
-            // Boucle à travers les photos apparentées
-            while ($query->have_posts()) : $query->the_post();
-            // Récupération de l'URL de la photo et de la référence
-            $photo_url = get_field('photo');
-            $reference = get_field('reference');
-            $photo_link = esc_url(get_permalink());
-        
-            // Conteneur pour chaque photo apparentée avec un lien vers la page de la photo
-            echo '<a href="' . $photo_link . '" class="related-photo">';
-            echo '  <!-- Image de la photo apparentée -->';
-            echo '  <img src="' . esc_url($photo_url) . '" alt="' . esc_attr(get_the_title()) . '">';
-            echo '  <!-- Référence de la photo apparentée -->';
-            echo '  <p>RÉF. PHOTO: ' . strtoupper($reference) . '</p>';
-            echo '</a>';
-        endwhile;
-        
-            // Réinitialise les données de la requête
-            wp_reset_postdata();
-        else :
-            // Affiche un message si aucune photo apparentée n'est trouvée
-            echo '<p class="photoNotFound">Pas de photo apparentée trouvée pour la catégorie.</p>';
-        endif;
-        ?>
-    </div>
-</section>
+            // Passer les arguments de la requête à la boîte photos
+            set_query_var('custom_args', $args);
+            // Inclure la boîte photos depuis le template part
+            get_template_part('templates-parts/boxphotos');
+            ?>
+        </div>
+    </section>
 
 
 <?php get_footer(); ?>

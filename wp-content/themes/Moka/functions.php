@@ -54,8 +54,8 @@ add_action('after_setup_theme', 'mota_setup');
         // appel des hoover des filtres
         // wp_enqueue_script('filtres-custom-script', get_stylesheet_directory_uri() . '/javascript/CustomJS.js', array('jquery'), '1.0', true);
 
-        // Appel de l'ajax-js du bouton charger plus
-    wp_enqueue_script('load-more-photos', get_template_directory_uri() . '/javascript/load-more-photos.js', array('jquery'), null, true);
+    //     // Appel de l'ajax-js du bouton charger plus
+    // wp_enqueue_script('load-more-photos', get_template_directory_uri() . '/javascript/load-more-photos.js', array('jquery'), null, true);
 
     // Passer des paramètres AJAX à votre script
     wp_localize_script('load-more-photos', 'ajax_params', array(
@@ -327,42 +327,15 @@ add_action('wp_ajax_nopriv_filter_photos', 'filter_photos_function');
 
 
 // Ajoutez cette fonction dans votre fichier functions.php
-function load_more_photos() {
-    $page = $_POST['page'];
-    $args = array(
-        'post_type'      => 'photo',
-        'posts_per_page' => 12,
-        'orderby'        => 'date',
-        'order'          => 'ASC',
-        'paged'          => $page,
-    );
-
-    $photo_block = new WP_Query($args);
-
-    if ($photo_block->have_posts()) :
-        while ($photo_block->have_posts()) :
-            $photo_block->the_post();
-            get_template_part('template-parts/bloc-photo', get_post_format());
-        endwhile;
-        wp_reset_postdata();
-    else :
-        echo 'no_posts';
-    endif;
-
-    die(); // N'oubliez pas cette ligne pour terminer le traitement AJAX
-}
+// ...
 
 // Ajoutez ces actions dans votre fichier functions.php
-add_action('wp_ajax_load_more_photos', 'load_more_photos');
-add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
+// ...
 
-// Ajoutez cette fonction dans votre fichier functions.php
-function enqueue_load_more_photos_script() {
-    wp_enqueue_script('load-more-photos', get_template_directory_uri() . '/javascript/load-more-photos.js', array('jquery'), null, true);
+// Ajoutez ces actions dans votre fichier functions.php
+// ...
 
-    // Passer des paramètres AJAX à votre script
-    wp_localize_script('load-more-photos', 'ajax_params', array(
-        'ajax_url' => admin_url('admin-ajax.php'),
-    ));
-}
-add_action('wp_enqueue_scripts', 'enqueue_load_more_photos_script');
+// Ajoutez ces actions dans votre fichier functions.php
+// Fonction pour vérifier si la page actuelle est la page de connexion
+// Fonction pour charger plus de photos
+// Fonction pour charger plus de photos
