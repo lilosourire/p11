@@ -196,146 +196,54 @@ add_action('wp_ajax_nopriv_filter_photos', 'filter_photos_function');
 
 // ajout de fonctionnalité du bouton charger plus
 
-
-
-/* Chargement photos Ajax load more */
-
-// Ajoutez cette fonction dans votre fichier functions.php
-// function load_more_photos() {
-//     $paged = $_POST['page'] + 1;
-//     $query_vars = json_decode(stripslashes($_POST['query']), true);
-//     $query_vars['paged'] = $paged;
-//     $query_vars['posts_per_page'] = 12;
-//     $query_vars['orderby'] = 'date';
-
-//     $photos = new WP_Query($query_vars);
-//     if ($photos->have_posts()) {
-//         ob_start();
-//         while ($photos->have_posts()) {
-//             $photos->the_post();
-//             get_template_part('template-parts/photo_block', null);
-//         }
-//         wp_reset_postdata();
-
-//         $output = ob_get_clean(); // Get the buffer and clean it
-//         echo $output; // Echo the output
-//     } else {
-//         error_log('Query Vars: ' . print_r($query_vars, true));
-//         error_log('Number of Posts: ' . $photos->post_count);
-//         echo 'no_posts';
-//     }
-//     die();
-// }
-
-
-
-// // Ajoutez ces actions dans votre fichier functions.php
-// add_action('wp_ajax_nopriv_load_more', 'load_more_photos');
-// add_action('wp_ajax_load_more', 'load_more_photos');
-
-
-// Ajoutez cette fonction dans votre fichier functions.php
-// function load_more_photos() {
-//     $paged = $_POST['page'] + 1;
-//     $query_vars = json_decode(stripslashes($_POST['query']), true);
-//     $query_vars['paged'] = $paged;
-//     $query_vars['posts_per_page'] = 12;
-//     $query_vars['orderby'] = 'date';
-
-//     $photos = new WP_Query($query_vars);
-//     if ($photos->have_posts()) {
-//         ob_start();
-//         while ($photos->have_posts()) {
-//             $photos->the_post();
-//             get_template_part('template-parts/photo_block', null);
-//         }
-//         wp_reset_postdata();
-
-//         $output = ob_get_clean(); // Get the buffer and clean it
-//         echo $output; // Echo the output
-//     } else {
-//         error_log('Query Vars: ' . print_r($query_vars, true));
-//         error_log('Number of Posts: ' . $photos->post_count);
-//         echo 'no_posts';
-//     }
-//     die();
-// }
-
-// // Ajoutez ces actions dans votre fichier functions.php
-// add_action('wp_ajax_nopriv_load_more', 'load_more_photos');
-// add_action('wp_ajax_load_more', 'load_more_photos');
-
-// // Utilisez wp_localize_script pour passer des données de PHP à JavaScript
-// $query_vars = array(
-//     'paged' => 1, // Ajoutez vos autres paramètres ici
-//     'posts_per_page' => 12,
-//     'orderby' => 'date',
-// );
-
-// wp_localize_script('ajaxchargeplus-script', 'ajaxloadmore', array('query_vars' => $query_vars));
-// wp_localize_script('ajax-charge-script', 'ajaxloadmore', array('query_vars' => $query_vars));
-
-// function enqueue_load_more_photos_script() {
-//     wp_enqueue_script('ajax-charge-script', get_stylesheet_directory_uri() . '/javascript/load-more-photo.js', array('jquery'), '1.0', true);
-
-//     // Passer des paramètres AJAX à votre script
-//     wp_localize_script('load-more-photos', 'ajax_params', array(
-//         'ajax_url' => admin_url('admin-ajax.php'),
-//     ));
-// }
-// add_action('wp_enqueue_scripts', 'enqueue_load_more_photos_script');
-
-// function load_more_photos() {
-//     $page = $_POST['page'];
-//     $args = array(
-//         'post_type'      => 'photo',
-//         'posts_per_page' => 12,
-//         'orderby'        => 'date',
-//         'order'          => 'ASC',
-//         'paged'          => $page,
-//     );
-
-//     $photo_block = new WP_Query($args);
-
-//     if ($photo_block->have_posts()) :
-//         while ($photo_block->have_posts()) :
-//             $photo_block->the_post();
-//             get_template_part('template-parts/photo_block', get_post_format());
-//         endwhile;
-//         wp_reset_postdata();
-//     else :
-//         echo 'Aucune photo trouvée.';
-//     endif;
-
-//     die(); // N'oubliez pas cette ligne pour terminer le traitement AJAX
-// }
-// add_action('wp_ajax_load_more_photos', 'load_more_photos');
-// add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos');
-// add_action('wp_ajax_nopriv_load_more', 'load_more_photos');
-// add_action('wp_ajax_load_more', 'load_more_photos'); // Pour les utilisateurs non connectés
-
-// // Ajoutez cette fonction dans votre fichier functions.php
-// function enqueue_load_more_photos_script() {
-//     wp_enqueue_script('load-more-photos', get_template_directory_uri() . '/path/to/ajaxchargeplus.js', array('jquery'), null, true);
-
-//     // Passer des paramètres AJAX à votre script
-//     wp_localize_script('load-more-photos', 'ajax_params', array(
-//         'ajax_url' => admin_url('admin-ajax.php'),
-//     ));
-// }
-// add_action('wp_enqueue_scripts', 'enqueue_load_more_photos_script');
-
-
-// Ajoutez cette fonction dans votre fichier functions.php
-// ...
-
 // Ajoutez ces actions dans votre fichier functions.php
-// ...
-
 // Ajoutez ces actions dans votre fichier functions.php
-// ...
 
-// Ajoutez ces actions dans votre fichier functions.php
-// Fonction pour vérifier si la page actuelle est la page de connexion
+// Déclaration de $query_vars en tant que variable globale
+global $query_vars;
+
 // Fonction pour charger plus de photos
-// Fonction pour charger plus de photos
+function load_more_photos() {
+    global $query_vars; // Utilisez la variable globale ici
+    $page = $_POST['page'];
+    $query_vars = json_decode(stripslashes($_POST['query']), true);
+    $query_vars['paged'] = $page;
+    $query_vars['posts_per_page'] = 8; // ajustez le nombre de photos à charger par page selon vos besoins
+    $query_vars['orderby'] = 'date';
+
+    $photos = new WP_Query($query_vars);
+
+    if ($photos->have_posts()) {
+        ob_start();
+        while ($photos->have_posts()) {
+            $photos->the_post();
+            get_template_part('/templates-part/boxphotos'); // Assurez-vous que c'est le bon chemin vers votre template
+        }
+        wp_reset_postdata();
+
+        $output = ob_get_clean(); // Obtenez la sortie du tampon et nettoyez-le
+        echo $output; // Affichez la sortie
+    } else {
+        echo 'no_posts';
+    }
+    die();
+}
+
+// Action pour les utilisateurs connectés et non connectés
+add_action('wp_ajax_nopriv_load_more', 'load_more_photos');
+add_action('wp_ajax_load_more', 'load_more_photos');
+
+// Ajoutez les paramètres AJAX au script
+function enqueue_load_more_photos_script() {
+    global $query_vars; // Utilisez la variable globale ici
+    wp_enqueue_script('ajax-charge-plus-script', get_stylesheet_directory_uri() . '/Javascript/ajaxchargeplus.js', array('jquery'), '1.0', true);
+
+    // Passez les paramètres AJAX à votre script
+    wp_localize_script('ajax-charge-plus-script', 'ajaxloadmore', array('query_vars' => $query_vars));
+
+    // Définissez la variable ajax_object
+    wp_localize_script('ajax-charge-plus-script', 'ajax_object', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+    ));
+}
+add_action('wp_enqueue_scripts', 'enqueue_load_more_photos_script');

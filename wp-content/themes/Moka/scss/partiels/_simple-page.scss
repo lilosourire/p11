@@ -246,41 +246,33 @@ body > section.cataloguePhotos > div.infos > h2 {
 }
 
 /* Section pour afficher des photos similaires */
-.related-photos {
-  max-width: 80%;
-  margin: 0 auto;
-  margin-bottom: 5%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+// titre
+body > section:nth-child(4) > div {
+  margin-top: 50px;
+  margin-bottom: 30px;
 }
-
-.titleSugest {
-  width: 100%;
-  margin: 20px 0;
-  text-align: center;
-}
-
+/* Styles pour les photos apparentées */
 .related-photo-container {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  margin: 20px;
 }
 
-.related-photo {
-  width: calc(
-    50% - 10px
-  ); /* 50% de largeur avec un espacement entre les éléments */
-  box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur */
-  text-align: center;
-  margin-bottom: 20px;
+.blockPhotoRelative {
+  flex: 0 0 calc(50% - 10px); /* Utilisez la moitié de la largeur du conteneur avec un espace entre les photos */
+  margin-bottom: 20px; /* Espace entre les photos */
 }
 
-.related-photo img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  aspect-ratio: 1 / 1;
+.blockPhotoRelative img {
+  width: 100%; /* Pour s'assurer que l'image occupe toute la largeur du conteneur */
+  height: auto; /* Pour maintenir les proportions de l'image */
+  object-fit: cover; /* Ajuste la taille de l'image tout en conservant ses proportions */
+  aspect-ratio: 1/1; /* Définit le ratio hauteur-largeur pour maintenir la forme carrée */
+}
+
+body > section:nth-child(4) > section > div > div > div > h2,
+body > section:nth-child(4) > section > div > div > div > h3 {
+  display: none;
 }
 
 .photoNotFound {
@@ -352,61 +344,4 @@ body > section.cataloguePhotos > div.infos > h2 {
   position: absolute;
   top: 1461px;
   left: 6038px;
-}
-
-/* Overlay pour l'effet de survol pour les photos de la section "Vous aimerez aussi" */
-.related-photo .singlePhotoOverlay {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  background-color: rgba(0, 0, 0, 0);
-  opacity: 0;
-  transition: background-color 0.3s, opacity 0.3s;
-  cursor: pointer;
-}
-
-/* Overlay pour l'effet de survol pour les photos de la section "Vous aimerez aussi" */
-.related-photo {
-  position: relative;
-  overflow: hidden;
-}
-
-.related-photo .singlePhotoOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-  background-color: rgba(0, 0, 0, 0);
-  opacity: 0;
-  cursor: pointer;
-  transition: background-color 0.3s, opacity 0.3s;
-}
-
-.related-photo:hover .singlePhotoOverlay {
-  background-color: rgba(0, 0, 0, 0.8);
-  opacity: 0.8;
-}
-
-/* Bouton plein écran pour les photos de la section "Vous aimerez aussi" */
-.related-photo .fullscreen-icon {
-  display: none;
-  position: absolute;
-  top: 2%;
-  right: 2%;
-  width: 34px;
-  height: 34px;
-}
-
-.related-photo:hover .fullscreen-icon {
-  display: block;
 }

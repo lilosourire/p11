@@ -71,8 +71,31 @@ foreach ($taxonomy as $taxonomy_slug => $label) {
 }
 ?>
 <!-- Nouvelle section pour afficher les photos carrées -->
-<!-- <!-- Section pour afficher des photos similaires -->
-<?php get_template_part('templates-part/boxphotos'); ?> 
+    <!-- Section pour afficher les 8 premières photos -->
+    <div id="imagesContainer">
+        <?php
+        $args = array(
+            'post_type' => 'photos',
+            'posts_per_page' => 8,
+            'orderby'        => 'rand', // Vous pouvez ajuster cela selon vos besoins
+            'order'          => 'ASC
+            ', // Nombre initial de photos à afficher
+            // Autres arguments de requête selon vos besoins
+        );
+
+        $photo_query = new WP_Query($args);
+
+        if ($photo_query->have_posts()) {
+            while ($photo_query->have_posts()) {
+                $photo_query->the_post();
+                get_template_part('/templates-part/boxphotos');
+            }
+            wp_reset_postdata();
+        }
+        ?>
+    </div>
+<!--  Section pour afficher des photos similaires -->
+<?php get_template_part('/templates-part/boxphotos'); ?> 
 <div id="blockPlusImage">
     <div id="imagesContainer">
         <!-- Conteneur pour afficher les images -->
@@ -83,7 +106,6 @@ foreach ($taxonomy as $taxonomy_slug => $label) {
 
 
 
-<?php wp_footer(); ?>
 </body>
 <?php get_footer(); ?>
 

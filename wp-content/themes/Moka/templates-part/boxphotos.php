@@ -5,13 +5,9 @@ $custom_args = get_query_var('custom_args', array());
 $query = new WP_Query($custom_args);
 // Vérifie si des photos apparentées ont été trouvées
 if ($query->have_posts()) :
-    // Ajout d'un message pour vérifier si des photos ont été trouvées
-    echo '<p>Des photos apparentées ont été trouvées !</p>';
 
     // Boucle à travers les photos apparentées
     while ($query->have_posts()) : $query->the_post();
-        // Ajout d'un message à l'intérieur de la boucle pour vérifier si elle fonctionne
-        echo '<p>La boucle fonctionne !</p>';
 
         // Récupération des données de la photo
         $photoUrl = get_field('photo');
@@ -56,6 +52,6 @@ if ($query->have_posts()) :
     wp_reset_postdata();
 else :
     // Affiche un message si aucune photo apparentée n'est trouvée
-    echo '<p class="photoNotFound">Pas de photo apparentée trouvée.</p>';
+    echo '<p class="photoNotFound">Pas de photo trouvée.</p>';
 endif;
 ?>

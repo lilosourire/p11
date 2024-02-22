@@ -1,6 +1,3 @@
-// Chargement de plus d'images avec Ajax
-console.log("Chargement de plus d'images avec Ajax : son js est chargé");
-
 document.addEventListener("DOMContentLoaded", function () {
   var button = document.getElementById("plusDImage");
   var imagesContainer = document.getElementById("imagesContainer");
@@ -14,22 +11,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     data.append("action", "load_more");
     data.append("page", page);
-
-    // Ajout de la clé "query"
     data.append("query", JSON.stringify(ajaxloadmore.query_vars));
 
     xhr.open("POST", ajax_object.ajax_url, true);
+
     xhr.onload = function () {
       if (xhr.status === 200) {
         var response = xhr.responseText;
         console.log("Réponse du serveur :", response);
 
-        if (response === "no_posts") {
-          button.remove();
-        } else {
+        if (response !== "no_posts") {
           page++;
           imagesContainer.insertAdjacentHTML("beforeend", response);
-          attachEventsToImages(); // Assurez-vous d'attacher les événements aux nouvelles images
+        } else {
+          button.remove();
         }
       } else {
         console.error("Erreur lors de la requête AJAX");
