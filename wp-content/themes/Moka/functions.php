@@ -41,7 +41,7 @@ add_action('after_setup_theme', 'mota_setup');
         // appel de la navigation
         wp_enqueue_script('navigation-script', get_stylesheet_directory_uri() . '/javascript/nav-photo.js', array('jquery'), '1.0', true);
         // appel de la navigation de la section "vous aimerez aussi"
-        wp_enqueue_script('section-vous-script', get_stylesheet_directory_uri() . '/javascript/vousaimerez.js', array('jquery'), '1.0', true);
+        // wp_enqueue_script('section-vous-script', get_stylesheet_directory_uri() . '/javascript/vousaimerez.js', array('jquery'), '1.0', true);
         // Aappel de la modale photo
         wp_enqueue_script('modalePhoto-script', get_stylesheet_directory_uri() . '/javascript/modalePhoto.js', array('jquery'), '1.0', true);
         // appel de la section photo de l'index.php

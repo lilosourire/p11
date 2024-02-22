@@ -126,7 +126,7 @@ $nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumb
             $args = array(
                 'post_type' => 'photos',
                 'posts_per_page' => 2, // Vous pouvez ajuster le nombre de photos à afficher
-                'post__not_in' => array(get_the_ID()),
+                // 'post__not_in' => array(get_the_ID()),
                 'tax_query' => array(
                     array(
                         'taxonomy' => 'categorie',
@@ -139,7 +139,8 @@ $nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumb
             // Passer les arguments de la requête à la boîte photos
             set_query_var('custom_args', $args);
             // Inclure la boîte photos depuis le template part
-            get_template_part('templates-parts/boxphotos');
+            get_template_part('/templates-part/boxphotos');
+
             ?>
         </div>
     </section>
