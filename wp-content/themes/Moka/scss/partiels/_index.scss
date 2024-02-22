@@ -97,81 +97,57 @@
   }
 }
 
-// /* Style pour le logo */
-// .logo-mota {
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//   max-width: 100%; /* Assure que le logo ne dépasse pas la taille du conteneur parent */
-// }
-
-/* Style pour la section contenant toutes les photos */
-// .all-photos {
-//   max-width: 80%;
-//   margin: 0 auto;
-//   margin-bottom: 5%;
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: space-between;
-//   flex-direction: row; /* Ajout de cette ligne pour spécifier la direction horizontale */
-// }
-
-// /* Style pour chaque conteneur de photo */
-// .all-photo-container {
-//   width: calc(
-//     50% - 10px
-//   ); /* 50% de largeur avec un espacement entre les éléments */
-//   box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur */
-//   text-align: center;
-//   margin-bottom: 20px;
-// }
-
-// /* Style pour chaque photo */
-// .all-photo img {
-//   width: 100%; /* Utilise 100% de la largeur du conteneur parent */
-//   height: auto;
-//   object-fit: cover;
-//   aspect-ratio: 1 / 1; /* Garantit que l'image conserve un ratio carré */
-// }
-
-// /* Style pour la référence de chaque photo */
-// .all-photo p {
-//   display: none;
-// }
-/* Style pour la nouvelle section contenant les photos carrées */
-/* Style pour la nouvelle section contenant les photos carrées */
-.all-photos {
-  max-width: 80%;
-  margin: 0 auto;
-  margin-bottom: 5%;
+// * Styles spécifiques pour la section "imagesContainer" sur toutes les pages */
+#imagesContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 20px;
+  justify-content: center;
 }
 
-/* Style pour chaque conteneur de photo carrée */
-.all-photo-container {
-  width: calc(50% - 10px);
-  box-sizing: border-box;
-  text-align: center;
-  margin-bottom: 20px;
+#imagesContainer .box-photo {
+  flex: 0 0 calc(50% - 20px);
+  margin-bottom: 10px;
 }
 
-/* Style pour chaque photo carrée */
-.all-photo img {
+#imagesContainer .box-photo img {
   width: 100%;
-  height: auto;
+  height: 100%; /* Modifier cette ligne pour maintenir la proportion de l'image */
   object-fit: cover;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1/1;
+  margin-bottom: 10px;
 }
 
-/* Style pour la référence de chaque photo carrée */
-.all-photo p {
+#imagesContainer .box-photo .photo-content {
+  position: relative;
+}
+
+#imagesContainer .box-photo h2 {
   display: none;
 }
 
+#imagesContainer .box-photo p {
+  margin-top: 10px;
+}
+
+/* Styles pour les photos sur les appareils mobiles */
+@media only screen and (max-width: 768px) {
+  #imagesContainer .box-photo {
+    flex: 0 0 100%; /* La largeur de la colonne à 100% sur les écrans plus petits */
+  }
+
+  #imagesContainer .box-photo img {
+    margin-bottom: 5px; /* Réduire l'espace entre les images sur les écrans plus petits */
+  }
+}
+
 /* Style pour le bouton "Charger plus" */
+
+.centered-button {
+  text-align: center;
+  margin-top: 20px; /* Ajustez la marge selon vos besoins */
+}
+
 #blockPusdImage {
   width: 100%;
   text-align: center;

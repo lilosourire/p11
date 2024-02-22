@@ -133,7 +133,6 @@ function get_thumbnail_info() {
 
 //ajout des fonctionnalitées pour les filtres
 
-
 function filter_photos_function(){
 
     $filter = $_POST['filter'];
@@ -196,8 +195,6 @@ add_action('wp_ajax_nopriv_filter_photos', 'filter_photos_function');
 
 // ajout de fonctionnalité du bouton charger plus
 
-// Ajoutez ces actions dans votre fichier functions.php
-// Ajoutez ces actions dans votre fichier functions.php
 
 // Déclaration de $query_vars en tant que variable globale
 global $query_vars;

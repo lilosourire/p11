@@ -72,36 +72,52 @@ foreach ($taxonomy as $taxonomy_slug => $label) {
 ?>
 <!-- Nouvelle section pour afficher les photos carrées -->
     <!-- Section pour afficher les 8 premières photos -->
-    <div id="imagesContainer">
-        <?php
-        $args = array(
-            'post_type' => 'photos',
-            'posts_per_page' => 8,
-            'orderby'        => 'rand', // Vous pouvez ajuster cela selon vos besoins
-            'order'          => 'ASC
-            ', // Nombre initial de photos à afficher
-            // Autres arguments de requête selon vos besoins
-        );
+<!-- ... Votre code HTML/PHP existant ... -->
 
-        $photo_query = new WP_Query($args);
+<div id="imagesContainer">
+    <?php
+    // Arguments de la requête pour récupérer les 8 premières photos de la série
+    $args = array(
+        'post_type'      => 'photos',
+        'posts_per_page' => 8,
+        'orderby'        => 'rand', // Vous pouvez ajuster cela selon vos besoins
+        'order'          => 'ASC',
+    );
 
-        if ($photo_query->have_posts()) {
-            while ($photo_query->have_posts()) {
-                $photo_query->the_post();
-                get_template_part('/templates-part/boxphotos');
-            }
-            wp_reset_postdata();
+    $photo_query = new WP_Query($args);
+
+    if ($photo_query->have_posts()) {
+        while ($photo_query->have_posts()) {
+            $photo_query->the_post();
+            ?>
+            <div class="box-photo">
+                <h2><?php the_title(); ?></h2>
+                <div class="photo-content">
+                    <?php the_post_thumbnail('full'); ?>
+                    <p><?php the_content(); ?></p>
+                </div>
+            </div>
+            <?php
         }
-        ?>
-    </div>
-<!--  Section pour afficher des photos similaires -->
-<?php get_template_part('/templates-part/boxphotos'); ?> 
+        wp_reset_postdata();
+    } else {
+        echo '<p class="photoNotFound">Pas de photo trouvée.</p>';
+    }
+    ?>
+</div>
+
+
+
+
 <div id="blockPlusImage">
-    <div id="imagesContainer">
-        <!-- Conteneur pour afficher les images -->
-    </div>
+    <div id="additionalImagesContainer">
+        <!-- Conteneur pour charger plus d'images via AJAX -->
+        <div class="centered-button">
     <button id="plusDImage" data-page="1">Charger plus</button>
 </div>
+
+
+<!-- ... Votre code HTML/PHP existant ... -->
 
 
 
