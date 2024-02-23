@@ -1,33 +1,33 @@
-// scripts.js
-document.addEventListener("DOMContentLoaded", function () {
-  var relatedPhotoContainers = document.querySelectorAll(".related-photo");
+jQuery(document).ready(function ($) {
+  var relatedPhotoContainers = $(".related-photo");
 
-  relatedPhotoContainers.forEach(function (container) {
-    var overlay = document.createElement("div");
-    overlay.className = "singlePhotoOverlay";
+  relatedPhotoContainers.each(function () {
+    var overlay = $("<div>").addClass("singlePhotoOverlay");
 
-    var infoIcon = document.createElement("div");
-    infoIcon.className = "info-icon center-icon";
-    infoIcon.innerHTML =
-      '<img src="<?php echo esc_url(get_template_directory_uri()); ?>/image/imagewebp/icon_info.png" alt="Icone info">';
-    overlay.appendChild(infoIcon);
+    var infoIcon = $("<div>").addClass("info-icon center-icon");
+    infoIcon.html(
+      '<img src="' +
+        ajax_params.template_directory_uri +
+        '/image/imagewebp/icon_info.png" alt="Icone info">'
+    );
+    overlay.append(infoIcon);
 
-    var fullscreenIcon = document.createElement("div");
-    fullscreenIcon.className = "fullscreen-icon center-icon";
-    fullscreenIcon.innerHTML =
-      '<img src="<?php echo esc_url(get_template_directory_uri()); ?>/image/imagewebp/fullscreen.png" alt="Icone fullscreen">';
-    overlay.appendChild(fullscreenIcon);
+    var fullscreenIcon = $("<div>").addClass("fullscreen-icon center-icon");
+    fullscreenIcon.html(
+      '<img src="' +
+        ajax_params.template_directory_uri +
+        '/image/imagewebp/fullscreen.png" alt="Icone fullscreen">'
+    );
+    overlay.append(fullscreenIcon);
 
-    container.appendChild(overlay);
+    $(this).append(overlay);
 
-    container.addEventListener("mouseenter", function () {
-      overlay.style.opacity = "0.8";
-      overlay.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
+    $(this).on("mouseenter", function () {
+      overlay.css({ opacity: "0.8", backgroundColor: "rgba(0, 0, 0, 0.8)" });
     });
 
-    container.addEventListener("mouseleave", function () {
-      overlay.style.opacity = "0";
-      overlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
+    $(this).on("mouseleave", function () {
+      overlay.css({ opacity: "0", backgroundColor: "rgba(0, 0, 0, 0)" });
     });
   });
 });
