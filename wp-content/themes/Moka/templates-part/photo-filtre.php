@@ -3,7 +3,7 @@
 $taxonomy = [
     'categorie' => 'CATÉGORIES',
     'format' => 'FORMATS',
-    'annees' => 'TRIER PAR',
+    'annee' => 'TRIER PAR',
 ];
 
 foreach ($taxonomy as $taxonomy_slug => $label) {

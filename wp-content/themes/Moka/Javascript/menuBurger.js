@@ -1,4 +1,4 @@
-console.log("le js du menu burger est appellé correctement");
+console.log("Navigation menu burger mobile : son js est chargé");
 
 $(document).ready(function () {
   const header = $("header");

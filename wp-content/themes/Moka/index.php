@@ -86,6 +86,12 @@ foreach ($taxonomy as $taxonomy_slug => $label) {
 
     $photo_query = new WP_Query($args);
 
+    wp_localize_script('Ajax-charge-plus-images', 'ajaxloadmore', array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'query_vars' => json_encode($args)
+        )
+   );
+
     if ($photo_query->have_posts()) {
         while ($photo_query->have_posts()) {
             $photo_query->the_post();
@@ -113,8 +119,11 @@ foreach ($taxonomy as $taxonomy_slug => $label) {
     <div id="additionalImagesContainer">
         <!-- Conteneur pour charger plus d'images via AJAX -->
         <div class="centered-button">
-    <button id="plusDImage" data-page="1">Charger plus</button>
+            <button id="plusDImage" data-page="1" data-url="<?php echo admin_url('admin-ajax.php'); ?>">Charger plus</button>
+        </div>
+    </div>
 </div>
+
 
 
 <!-- ... Votre code HTML/PHP existant ... -->
