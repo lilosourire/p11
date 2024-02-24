@@ -41,6 +41,7 @@ if (is_array($categories) && !empty($categories)) {
       }
       wp_reset_postdata();
   }
+  
   ?>
 </div>
 <!-- le logo-titre -->
