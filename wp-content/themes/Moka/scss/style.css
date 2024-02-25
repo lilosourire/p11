@@ -926,4 +926,47 @@ body > section:nth-child(4) > section > div > div > div > h3 {
 #categorie #format #annee:hover {
   background-color: #fe5858 !important;
   color: white !important;
+}
+
+/* Appliquer le CSS à vos éléments spécifiques */
+#categorie.custom-select,
+#format.custom-select,
+#annee.custom-select {
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+#categorie.custom-select:hover,
+#format.custom-select:hover,
+#annee.custom-select:hover {
+  background-color: #fe5858 !important;
+  color: white !important;
+}
+
+#categorie.custom-select option,
+#format.custom-select option,
+#annee.custom-select option {
+  background-color: transparent !important;
+  color: #000 !important;
+}
+
+#categorie.custom-select option:hover,
+#format.custom-select option:hover,
+#annee.custom-select option:hover {
+  background-color: #fe5858 !important;
+  color: white !important;
+}
+
+#categorie.custom-select option:first-child,
+#format.custom-select option:first-child,
+#annee.custom-select option:first-child {
+  background-color: #ffd6d6 !important;
+  color: #000 !important;
+}
+
+#categorie.custom-select option:selected,
+#format.custom-select option:selected,
+#annee.custom-select option:selected {
+  background-color: #e00000 !important;
+  color: #fff !important;
 }/*# sourceMappingURL=style.css.map */

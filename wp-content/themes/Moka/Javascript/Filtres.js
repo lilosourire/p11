@@ -1,37 +1,43 @@
-
 /* les Filtres */
 console.log("les Filtres : son js est chargé");
 
-(function($){
+// Assurez-vous que jQuery est chargé avant ce code
 
-    function fetchFilteredPhotos(){
-        var filter = {
-            'categorie': $('#categorie').val(),
-            'format': $('#format').val(),
-            'annees': $('#annees').val(),
-        };
+jQuery(document).ready(function ($) {
+  // Activer Select2 pour les éléments ayant la classe 'select2'
+  $(".taxonomy-select").select2();
+});
 
-        $.ajax({
-            url: ajaxurl,
-            data: {
-                'action': 'filter_photos',
-                'filter': filter
-            },
-            type: 'POST',
-            beforeSend: function(){
-                $('#containerPhoto').html('<div class="loading">Chargement...</div>');
-            },
-            success: function(data) {
-                $('#containerPhoto').html(data);
-                attachEventsToImages();
-                setTimeout(function() {
-                document.getElementById('containerPhoto').scrollIntoView();
-            }, 0);
-        }})
-    }
+(function ($) {
+  function fetchFilteredPhotos() {
+    var filter = {
+      categorie: $("#categorie").val(),
+      format: $("#format").val(),
+      annees: $("#annees").val(),
+    };
 
-    $('#filtrePhoto select').on('change', function(event){
-        event.preventDefault();
-        fetchFilteredPhotos();
+    $.ajax({
+      url: ajaxurl,
+      data: {
+        action: "filter_photos",
+        filter: filter,
+      },
+      type: "POST",
+      beforeSend: function () {
+        $("#containerPhoto").html('<div class="loading">Chargement...</div>');
+      },
+      success: function (data) {
+        $("#containerPhoto").html(data);
+        attachEventsToImages();
+        setTimeout(function () {
+          document.getElementById("containerPhoto").scrollIntoView();
+        }, 0);
+      },
     });
+  }
+
+  $("#filtrePhoto select").on("change", function (event) {
+    event.preventDefault();
+    fetchFilteredPhotos();
+  });
 })(jQuery);

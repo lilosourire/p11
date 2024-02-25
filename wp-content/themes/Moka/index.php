@@ -51,6 +51,26 @@ if (is_array($categories) && !empty($categories)) {
 <!--section pour les filtres  -->
 <?php
 // Affichage taxonomies
+// $taxonomy = [
+//     'categorie' => 'CATÉGORIES',
+//     'format' => 'FORMATS',
+//     'annee' => 'TRIER PAR',
+// ];
+
+// foreach ($taxonomy as $taxonomy_slug => $label) {
+//     $terms = get_terms($taxonomy_slug);
+//     if ($terms && !is_wp_error($terms)) {
+
+//         echo "<select id='$taxonomy_slug' class='custom-select taxonomy-select'>";
+
+//         echo "<option value=''>$label</option>";
+//         foreach ($terms as $term) {
+//             echo "<option value='$term->slug'>$term->name</option>";
+//         }
+//         echo "</select>";
+//     }
+// }
+
 $taxonomy = [
     'categorie' => 'CATÉGORIES',
     'format' => 'FORMATS',
@@ -70,6 +90,7 @@ foreach ($taxonomy as $taxonomy_slug => $label) {
         echo "</select>";
     }
 }
+
 ?>
 <!-- Nouvelle section pour afficher les photos carrées -->
     <!-- Section pour afficher les 8 premières photos -->
@@ -132,7 +153,7 @@ foreach ($taxonomy as $taxonomy_slug => $label) {
 
 
 
-</body>
+
 <?php get_footer(); ?>
 
 

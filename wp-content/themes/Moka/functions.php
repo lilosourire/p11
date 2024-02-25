@@ -50,8 +50,9 @@ add_action('after_setup_theme', 'mota_setup');
         // appel du bouton chargement
         wp_enqueue_script('ajax-charge-script', get_stylesheet_directory_uri() . '/javascript/ajaxchargeplus.js', array('jquery'), '1.0', true);
     // Passer des paramètres AJAX à votre script
-    wp_localize_script('load-more-photos', 'ajax_params', array(
-        'ajax_url' => admin_url('admin-ajax.php'),
+    wp_localize_script('ajax-charge-script', 'ajaxloadmore', array(
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'query_vars' => json_encode(array()), // Si vous n'avez pas d'autres paramètres spécifiques à transmettre
     ));
 }
 add_action('wp_enqueue_scripts', 'script_JS_Custo');
@@ -178,7 +179,9 @@ add_action('wp_ajax_nopriv_filter_photos', 'filter_photos_function');
 
 // ajout de fonctionnalité du bouton charger plus
 
+
 function load_more_photos() {
+    error_log('load_more_photos appelée'); // Assurez-vous que cette ligne s'affiche dans les logs
     $paged = $_POST['page'] + 1;
     $query_vars = json_decode(stripslashes($_POST['query']), true);
     $query_vars['paged'] = $paged;
@@ -190,21 +193,40 @@ function load_more_photos() {
         ob_start();
         while ($photos->have_posts()) {
             $photos->the_post();
-            get_template_part('/templates-part/boxphotos', null);
+
+            // Vérifiez si ACF est disponible avant d'utiliser get_field
+            if (function_exists('get_field')) {
+                $photo_url = get_field('photo', get_the_ID());
+                $reference = get_field('reference', get_the_ID());
+                $type = get_field('type', get_the_ID());
+                $annee = get_the_terms(get_the_ID(), 'annee');
+                $categories = get_the_terms(get_the_ID(), 'categorie');
+                $formats = get_the_terms(get_the_ID(), 'format');
+
+                // Assurez-vous que tous les champs ACF nécessaires sont présents et correctement récupérés
+                if ($photo_url && $reference && $type && $annee && $categories && $formats) {
+                    // Le reste de votre code pour afficher les éléments
+                    get_template_part('/templates-part/boxphotos', null);
+                } else {
+                    // Si des champs ACF manquent, vous pouvez éventuellement gérer cela ici
+                }
+            } else {
+                // ACF n'est pas disponible, vous pouvez gérer cela en conséquence
+            }
         }
         wp_reset_postdata();
 
         $output = ob_get_clean(); // Get the buffer and clean it
         echo $output; // Echo the output
-    }
-    else {
+    } else {
         ob_clean(); // Clean any previous output
         echo 'no_posts';
     }
-        die();
-
+    die();
 }
+
 add_action('wp_ajax_nopriv_load_more', 'load_more_photos');
 add_action('wp_ajax_load_more', 'load_more_photos');
+
 
 
