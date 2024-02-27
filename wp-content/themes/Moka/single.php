@@ -126,7 +126,7 @@ $nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumb
             $args = array(
                 'post_type' => 'photos',
                 'posts_per_page' => 2, // Vous pouvez ajuster le nombre de photos à afficher
-                // 'post__not_in' => array(get_the_ID()),
+                'post__not_in' => array(get_the_ID()),
                 'tax_query' => array(
                     array(
                         'taxonomy' => 'categorie',
@@ -134,16 +134,22 @@ $nextThumbnailURL = $nextPost ? get_the_post_thumbnail_url($nextPost->ID, 'thumb
                         'terms' => $categories ? wp_list_pluck($categories, 'term_id') : array(),
                     ),
                 ),
-            );
+              );
 
-            // Passer les arguments de la requête à la boîte photos
-            set_query_var('custom_args', $args);
-            // Inclure la boîte photos depuis le template part
-            get_template_part('/templates-part/boxphotos');
-
+            $query = new WP_Query($args);
+                // Boucle à travers les photos apparentées
+                while ($query->have_posts()) : 
+                  $query->the_post();
+                  $photo_url = get_field('photo');
+                  $reference = get_field('reference');
+                  get_template_part('/templates-part/boxphotos');
+                endwhile;  
+                // Vérifie si des photos apparentées ont été trouvées
+                if (!$query->have_posts()) :
+                  echo '<p class="photoNotFound">Pas de photo trouvée.</p>';
+                endif;
+            wp_reset_postdata();
             ?>
         </div>
     </section>
-
-
 <?php get_footer(); ?>
