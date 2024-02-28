@@ -187,6 +187,7 @@ function load_more_photos() {
     $query_vars['paged'] = $paged;
     $query_vars['posts_per_page'] = 8;
     $query_vars['orderby'] = 'date';
+    $query_vars['post_type'] = 'photos';
 
     $photos = new WP_Query($query_vars);
     if ($photos->have_posts()) {

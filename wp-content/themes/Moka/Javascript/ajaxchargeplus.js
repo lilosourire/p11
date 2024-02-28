@@ -1,6 +1,7 @@
 console.log("Chargement de plus d'images avec Ajax : son js est chargé");
 
 (function ($) {
+  console.log("ajxloadmore", ajaxloadmore.query_vars);
   $("#plusDImage").click(function () {
     var button = $(this),
       data = {
