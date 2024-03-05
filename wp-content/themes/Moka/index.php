@@ -48,50 +48,52 @@ if (is_array($categories) && !empty($categories)) {
 <div id="logo-image" class="banner-logo">
         <img src="<?php echo esc_url(get_template_directory_uri()) . '/image/imagewebp/titreheader.png'; ?>" alt="logo du titre">
     </div>
-<!--section pour les filtres  -->
-<?php
-// Affichage taxonomies
-// $taxonomy = [
-//     'categorie' => 'CATÉGORIES',
-//     'format' => 'FORMATS',
-//     'annee' => 'TRIER PAR',
-// ];
+<!-- Section pour les filtres -->
+<section id="filtrePhoto">
+    <div id="section1">
+        <?php
+        $taxonomyLeft = [
+            'categorie' => 'CATÉGORIES',
+            'format' => 'FORMATS',
+        ];
 
-// foreach ($taxonomy as $taxonomy_slug => $label) {
-//     $terms = get_terms($taxonomy_slug);
-//     if ($terms && !is_wp_error($terms)) {
-
-//         echo "<select id='$taxonomy_slug' class='custom-select taxonomy-select'>";
-
-//         echo "<option value=''>$label</option>";
-//         foreach ($terms as $term) {
-//             echo "<option value='$term->slug'>$term->name</option>";
-//         }
-//         echo "</select>";
-//     }
-// }
-
-$taxonomy = [
-    'categorie' => 'CATÉGORIES',
-    'format' => 'FORMATS',
-    'annee' => 'TRIER PAR',
-];
-
-foreach ($taxonomy as $taxonomy_slug => $label) {
-    $terms = get_terms($taxonomy_slug);
-    if ($terms && !is_wp_error($terms)) {
-
-        echo "<select id='$taxonomy_slug' class='custom-select taxonomy-select'>";
-
-        echo "<option value=''>$label</option>";
-        foreach ($terms as $term) {
-            echo "<option value='$term->slug'>$term->name</option>";
+        foreach ($taxonomyLeft as $taxonomy_slug => $label) {
+            $terms = get_terms($taxonomy_slug);
+            if ($terms && !is_wp_error($terms)) {
+                echo "<select id='$taxonomy_slug' class='custom-select taxonomy-select'>";
+                echo "<option value=''>$label</option>";
+                foreach ($terms as $term) {
+                    echo "<option value='$term->slug'>$term->name</option>";
+                }
+                echo "</select>";
+            }
         }
-        echo "</select>";
-    }
-}
+        ?>
+    </div>
 
-?>
+    <div id="section2">
+        <?php
+        $taxonomyRight = [
+            'annee' => 'TRIER PAR',
+        ];
+
+        foreach ($taxonomyRight as $taxonomy_slug => $label) {
+            $terms = get_terms($taxonomy_slug);
+            if ($terms && !is_wp_error($terms)) {
+                echo "<select id='$taxonomy_slug' class='custom-select taxonomy-select'>";
+                echo "<option value=''>$label</option>";
+                foreach ($terms as $term) {
+                    echo "<option value='$term->slug'>$term->name</option>";
+                }
+                echo "</select>";
+            }
+        }
+        ?>
+    </div>
+</section>
+
+
+
 <!-- Nouvelle section pour afficher les photos carrées -->
     <!-- Section pour afficher les 8 premières photos -->
 <!-- ... Votre code HTML/PHP existant ... -->

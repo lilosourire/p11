@@ -8,6 +8,7 @@ $categories = get_the_terms(get_the_ID(), 'categories');
 $categorie_name = get_the_terms(get_the_ID(), 'categorie')[0]->name;
 
 ?>
+<div class="photo-gallery-container">
 <div class="blockPhotoRelative">
     <!-- Afficher l'image avec son URL et un texte alternatif -->
     <img src="<?php echo esc_url($photoUrl); ?>" alt="<?php the_title_attribute(); ?>">
@@ -37,4 +38,5 @@ $categorie_name = get_the_terms(get_the_ID(), 'categorie')[0]->name;
         endif; ?>
         <?php wp_reset_postdata(); ?>
     </div>
+</div>
 </div>

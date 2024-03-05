@@ -822,6 +822,8 @@ body > section:nth-child(4) > section > div > div > div > h3 {
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  margin-left: 80px;
+  margin-right: 80px;
 }
 
 #imagesContainer .box-photo {
@@ -859,6 +861,10 @@ body > section:nth-child(4) > section > div > div > div > h3 {
     margin-bottom: 5px; /* Réduire l'espace entre les images sur les écrans plus petits */
   }
 }
+#imagesContainer > div:nth-child(7) > div > figure {
+  display: none;
+}
+
 /* Style pour le bouton "Charger plus" */
 .centered-button {
   text-align: center;
@@ -894,6 +900,122 @@ body > section:nth-child(4) > section > div > div > div > h3 {
   font-size: 20px;
   text-align: center;
   margin: 20px 0;
+}
+
+.blockPhotoRelative {
+  width: calc(50% - 20px); /* Vous pouvez ajuster cela selon vos besoins */
+  margin-bottom: 10px;
+  float: left; /* Ajout de la propriété float pour afficher les éléments côte à côte */
+  box-sizing: border-box;
+}
+
+.photo-gallery-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.blockPhotoRelative img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  aspect-ratio: 1/1;
+  margin-bottom: 10px;
+}
+
+.blockPhotoRelative .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.blockPhotoRelative .overlay h2,
+.blockPhotoRelative .overlay h3 {
+  display: none;
+}
+
+.blockPhotoRelative .overlay .eye-icon,
+.blockPhotoRelative .overlay .fullscreen-icon {
+  margin-top: 10px;
+}
+
+.blockPhotoRelative .overlay .eye-icon img,
+.blockPhotoRelative .overlay .fullscreen-icon img {
+  width: 30px; /* Ajustez la taille de l'icône selon vos besoins */
+  height: 30px;
+}
+
+/* Ajout de l'espace entre les deux photos */
+/* Styles pour les appareils mobiles */
+@media only screen and (max-width: 768px) {
+  .blockPhotoRelative {
+    width: 100%;
+  }
+  #imagesContainer {
+    flex-wrap: nowrap; /* Empêcher le retour à la ligne */
+  }
+}
+/* Styles pour le conteneur #filtrePhoto */
+#filtrePhoto {
+  width: 1140px;
+  display: flex;
+  margin-left: 90px;
+  margin-right: 0px;
+  gap: 410px;
+}
+@media screen and (max-width: 770px) {
+  #filtrePhoto {
+    width: 315px;
+    flex-direction: column;
+  }
+}
+@media screen and (min-width: 770px) and (max-width: 1140px) {
+  #filtrePhoto {
+    width: 715px;
+  }
+}
+@media screen and (max-width: 340px) {
+  #filtrePhoto {
+    margin-bottom: 50px;
+  }
+}
+
+#section1 {
+  display: flex;
+  justify-content: flex-end;
+  gap: 50px;
+  margin-right: 50px; /* Espacement entre le sélecteur de gauche et la bordure droite */
+}
+
+#section2 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.custom-select {
+  width: 250px;
+  margin-left: auto; /* Place le sélecteur à droite dans la section */
+  position: relative;
+}
+
+.custom-select:after {
+  content: "▼"; /* Utilisez un caractère flèche vers le bas ou une image d'icône de flèche */
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Ajustez la distance de la flèche par rapport à la droite */
+  transform: translateY(-50%);
+  pointer-events: none; /* Assurez-vous que la flèche ne perturbe pas la sélection */
 }
 
 /* Ajouter du CSS pour personnaliser Select2 */

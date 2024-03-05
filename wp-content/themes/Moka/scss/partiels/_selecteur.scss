@@ -1,3 +1,54 @@
+/* Styles pour le conteneur #filtrePhoto */
+#filtrePhoto {
+  // padding-top: 50px;
+  width: 1140px;
+  display: flex;
+  // justify-content: space-between;
+  margin-left: 90px;
+  margin-right: 0px;
+  gap: 410px;
+
+  @media screen and (max-width: 770px) {
+    width: 315px;
+    flex-direction: column;
+  }
+
+  @media screen and (min-width: 770px) and (max-width: 1140px) {
+    width: 715px;
+  }
+
+  @media screen and (max-width: 340px) {
+    margin-bottom: 50px;
+  }
+}
+
+#section1 {
+  display: flex;
+  justify-content: flex-end;
+  gap: 50px;
+  margin-right: 50px; /* Espacement entre le sélecteur de gauche et la bordure droite */
+}
+
+#section2 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.custom-select {
+  width: 250px;
+  margin-left: auto; /* Place le sélecteur à droite dans la section */
+  position: relative;
+}
+
+.custom-select:after {
+  content: "▼"; /* Utilisez un caractère flèche vers le bas ou une image d'icône de flèche */
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Ajustez la distance de la flèche par rapport à la droite */
+  transform: translateY(-50%);
+  pointer-events: none; /* Assurez-vous que la flèche ne perturbe pas la sélection */
+}
+
 /* Ajouter du CSS pour personnaliser Select2 */
 .select2-container--default .select2-selection--single {
   border: 1px solid #ced4da; /* Couleur de la bordure */
