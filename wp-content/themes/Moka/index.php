@@ -150,11 +150,6 @@ if (is_array($categories) && !empty($categories)) {
 
 
 
-<!-- ... Votre code HTML/PHP existant ... -->
-
-
-
-
 
 <?php get_footer(); ?>
 

@@ -903,22 +903,30 @@ body > section:nth-child(4) > section > div > div > div > h3 {
 }
 
 .blockPhotoRelative {
-  width: calc(50% - 20px); /* Vous pouvez ajuster cela selon vos besoins */
+  width: calc(50% - 80px); /* Vous pouvez ajuster cela selon vos besoins */
   margin-bottom: 10px;
   float: left; /* Ajout de la propriété float pour afficher les éléments côte à côte */
   box-sizing: border-box;
 }
 
 .photo-gallery-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(50% - 20px), 1fr));
   gap: 20px;
-  justify-content: center;
-  margin-bottom: 50px;
+  justify-content: space-between;
+  margin-left: 80px;
+  margin-right: 80px;
 }
 
-.blockPhotoRelative img {
+/* Assurez-vous que .box-photo occupe la largeur totale de la colonne */
+.photo-gallery-container .box-photo {
   width: 100%;
+}
+
+/* Ajoutez d'autres styles au besoin */
+/* Ajoutez d'autres styles au besoin */
+.blockPhotoRelative img {
+  width: 620px;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
